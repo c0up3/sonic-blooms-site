@@ -108,6 +108,29 @@ const allTracks = releases.flatMap((release) =>
   })),
 );
 
+const musicVideos = [
+  {
+    title: "The Color Black",
+    releaseTitle: "nORMAL PEOPLE sCARE mE",
+    youtube: "6AWmTgZZqS8",
+  },
+  {
+    title: "I Tried To Calm You",
+    releaseTitle: "The Distance Between Us",
+    youtube: "Kp8q5LtoIA8",
+  },
+  {
+    title: "Your Artificial Heart",
+    releaseTitle: "The Distance Between Us",
+    youtube: "D-m2mjx1okU",
+  },
+  {
+    title: "I Said It Once Before",
+    releaseTitle: "The Distance Between Us",
+    youtube: "OjDicPHEkMw",
+  },
+];
+
 const encode = (value) => encodeURIComponent(`${artist} ${value}`);
 const spotifyUrl = (title) => `https://open.spotify.com/search/${encode(title)}`;
 const youtubeMusicUrl = (title) => `https://music.youtube.com/search?q=${encode(title)}`;
@@ -121,7 +144,7 @@ function platformLinks(track) {
     ["Apple", track.apple],
     ["Spotify", spotifyUrl(track.title)],
     ["YouTube Music", youtubeMusicUrl(track.title)],
-    ["YouTube", youtubeUrl(track)],
+    ["YouTube Topic", youtubeUrl(track)],
   ]
     .map(([label, url]) => `<a href="${url}" target="_blank" rel="noreferrer">${label}</a>`)
     .join("");
@@ -219,19 +242,25 @@ function renderTracks(filter = "all", search = "") {
 
 function renderVideos() {
   const grid = document.querySelector("#video-grid");
-  const videos = allTracks.filter((track) => track.youtube);
-  grid.innerHTML = videos
+  grid.innerHTML = musicVideos
     .map(
-      (track) => `
-      <a class="video-card" href="${youtubeUrl(track)}" target="_blank" rel="noreferrer">
-        <img src="https://img.youtube.com/vi/${track.youtube}/hqdefault.jpg" alt="${track.title} video thumbnail" loading="lazy" />
+      (video) => `
+      <a class="video-card" href="https://www.youtube.com/watch?v=${video.youtube}" target="_blank" rel="noreferrer">
+        <img src="https://img.youtube.com/vi/${video.youtube}/hqdefault.jpg" alt="${video.title} music video thumbnail" loading="lazy" />
         <div>
-          <span>${track.releaseTitle}</span>
-          <h3>${track.title}</h3>
+          <span>${video.releaseTitle}</span>
+          <h3>${video.title}</h3>
         </div>
       </a>`,
     )
-    .join("");
+    .join("") +
+    `<a class="video-card" href="https://www.youtube.com/@sonicbloomsmusic/videos" target="_blank" rel="noreferrer">
+      <img src="/assets/journey/theater-memory-fire.jpg" alt="Sonic Blooms music video channel" loading="lazy" />
+      <div>
+        <span>Official channel</span>
+        <h3>Watch all music videos</h3>
+      </div>
+    </a>`;
 }
 
 function openSong(title) {

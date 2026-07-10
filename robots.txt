@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sonic-blooms.com/sitemap.xml
+

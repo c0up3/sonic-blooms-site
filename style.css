@@ -284,6 +284,7 @@ p {
 .journey,
 .music-console,
 .video-theatre,
+.members-preview,
 .vault,
 .return-loop {
   width: min(1220px, calc(100% - 2rem));
@@ -299,6 +300,7 @@ p {
 
 .platform-strip a,
 .loop-grid article,
+.members-grid article,
 .release-card,
 .track-card,
 .video-card,
@@ -323,6 +325,7 @@ p {
 .track-era,
 .video-card span,
 .fan-card__top span,
+.members-grid span,
 .loop-grid span {
   color: var(--blue);
   font-family: Consolas, "SFMono-Regular", monospace;
@@ -497,6 +500,7 @@ p {
 
 .music-console,
 .video-theatre,
+.members-preview,
 .return-loop {
   padding: clamp(3rem, 8vw, 6rem) 0;
 }
@@ -641,6 +645,36 @@ p {
   padding: 0.9rem;
 }
 
+.members-preview {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.members-grid article {
+  min-height: 16rem;
+  padding: 1rem;
+  background:
+    linear-gradient(180deg, rgba(120, 216, 238, 0.08), transparent 45%),
+    linear-gradient(135deg, rgba(201, 167, 107, 0.1), transparent),
+    var(--panel);
+}
+
+.members-grid article p {
+  font-size: 0.95rem;
+}
+
+.anchor-target {
+  display: block;
+  height: 1px;
+  scroll-margin-top: 5rem;
+}
+
 .vault {
   position: relative;
   overflow: hidden;
@@ -751,10 +785,10 @@ p {
 .unlock-panel {
   display: grid;
   gap: 0.55rem;
-  border: 1px solid rgba(120, 216, 238, 0.36);
+  border: 1px solid rgba(201, 167, 107, 0.36);
   border-radius: 8px;
   padding: 0.85rem;
-  background: rgba(120, 216, 238, 0.08);
+  background: rgba(201, 167, 107, 0.08);
 }
 
 .unlock-panel[hidden] {
@@ -766,12 +800,8 @@ p {
   font-size: 0.9rem;
 }
 
-.vault-downloads {
-  margin-top: 0.2rem;
-}
-
-.fan-card.is-unlocked label,
-.fan-card.is-unlocked .oauth-row {
+.fan-card.is-waitlisted label,
+.fan-card.is-waitlisted .oauth-row {
   display: none;
 }
 
@@ -840,6 +870,7 @@ p {
   .platform-strip,
   .track-grid,
   .video-grid,
+  .members-grid,
   .loop-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -926,6 +957,7 @@ p {
   .track-grid,
   .video-grid,
   .platform-strip,
+  .members-grid,
   .loop-grid {
     grid-template-columns: 1fr;
   }

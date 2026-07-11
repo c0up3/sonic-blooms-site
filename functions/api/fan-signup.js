@@ -24,7 +24,7 @@ export async function onRequestPost({ request, env }) {
   const favourite = String(payload.favourite || "").trim().slice(0, 160);
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return new Response(JSON.stringify({ ok: false, message: "Add a valid email to enter the Signal Room." }), {
+    return new Response(JSON.stringify({ ok: false, message: "Add a valid email to join the members waitlist." }), {
       status: 400,
       headers,
     });
@@ -51,9 +51,9 @@ export async function onRequestPost({ request, env }) {
       await env.EMAIL.send({
         to: env.SIGNUP_NOTIFY_TO || "band@sonic-blooms.com",
         from: env.SIGNUP_NOTIFY_FROM || "fans@sonic-blooms.com",
-        subject: "New Sonic Blooms fan signup",
+        subject: "New Sonic Blooms members waitlist signup",
         text: [
-          "New Sonic Blooms fan signup",
+          "New Sonic Blooms members waitlist signup",
           "",
           `Name: ${name || "(not provided)"}`,
           `Email: ${email}`,
@@ -61,7 +61,7 @@ export async function onRequestPost({ request, env }) {
           `Created: ${signup.createdAt}`,
         ].join("\n"),
         html: `
-          <h1>New Sonic Blooms fan signup</h1>
+          <h1>New Sonic Blooms members waitlist signup</h1>
           <p><strong>Name:</strong> ${escapeHtml(name || "(not provided)")}</p>
           <p><strong>Email:</strong> ${escapeHtml(email)}</p>
           <p><strong>Favourite signal:</strong> ${escapeHtml(favourite || "(not provided)")}</p>
@@ -81,10 +81,10 @@ export async function onRequestPost({ request, env }) {
       stored,
       emailSent,
       message: emailSent
-        ? "Signal Room unlocked. Welcome in."
+        ? "You are on the list. Members access opens soon."
         : stored
-          ? "Signal Room unlocked. New drops will appear here first."
-          : "Signal Room unlocked on this device. New drops will appear here first.",
+          ? "You are on the list. Members access opens soon."
+          : "You are on the list. Members access opens soon.",
       emailError,
     }),
     { headers },

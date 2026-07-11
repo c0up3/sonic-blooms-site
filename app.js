@@ -301,7 +301,7 @@ function wireInteractions() {
   document.querySelectorAll(".oauth-row button").forEach((button) => {
     button.addEventListener("click", () => {
       const message = document.querySelector("#fan-message");
-      message.textContent = `${button.dataset.provider} sign-in is coming soon. Use email for now and your Signal Room pass will stay on this device.`;
+      message.textContent = `${button.dataset.provider} sign-in is coming soon. The members room will only open after protected sign-in is connected.`;
     });
   });
 }
@@ -336,26 +336,19 @@ function wireScrollState() {
 function wireFanForm() {
   const form = document.querySelector("#fan-form");
   const message = document.querySelector("#fan-message");
-  const unlockPanel = document.querySelector("#unlock-panel");
   const submitButton = form.querySelector('button[type="submit"]');
 
-  const showUnlocked = (text = "Signal Room unlocked. Welcome in.") => {
+  const showWaitlisted = (text = "You are on the list. Members access opens soon.") => {
     message.textContent = text;
-    form.classList.add("is-unlocked");
-    unlockPanel.hidden = false;
-    submitButton.textContent = "Signal Room unlocked";
+    form.classList.add("is-waitlisted");
+    submitButton.textContent = "You are on the list";
     submitButton.disabled = true;
   };
 
   const params = new URLSearchParams(window.location.search);
   if (params.has("name") || params.has("email") || params.has("favourite")) {
-    history.replaceState(null, "", `${window.location.pathname}${window.location.hash || "#vault"}`);
-    message.textContent = "Almost there. Add a valid email address and enter the Signal Room.";
-  }
-
-  const saved = localStorage.getItem("sonicBloomsFan");
-  if (saved) {
-    showUnlocked("Signal Room unlocked on this device. New drops will appear here first.");
+    history.replaceState(null, "", `${window.location.pathname}${window.location.hash || "#members"}`);
+    message.textContent = "Almost there. Add a valid email address to join the members waitlist.";
   }
 
   form.addEventListener("submit", async (event) => {
@@ -378,15 +371,14 @@ function wireFanForm() {
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || data.ok === false) {
-        message.textContent = data.message || "Add a valid email address to enter the Signal Room.";
+        message.textContent = data.message || "Add a valid email address to join the members waitlist.";
         submitButton.disabled = false;
         return;
       }
-      localStorage.setItem("sonicBloomsFan", JSON.stringify({ email: payload.email, date: new Date().toISOString() }));
-      showUnlocked(data.message || "Signal Room unlocked. Welcome in.");
+      showWaitlisted("You are on the list. Members access opens soon.");
     } catch (error) {
-      localStorage.setItem("sonicBloomsFan", JSON.stringify({ email: payload.email, date: new Date().toISOString() }));
-      showUnlocked("Signal Room unlocked on this device. New drops will appear here first.");
+      message.textContent = "The waitlist could not be reached just now. Please try again in a moment.";
+      submitButton.disabled = false;
     }
   });
 }

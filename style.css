@@ -748,6 +748,15 @@ p {
   margin-bottom: 0.3rem;
 }
 
+.member-login-link,
+.unlock-panel a {
+  width: fit-content;
+  border-bottom: 1px solid rgba(120, 216, 238, 0.7);
+  color: var(--blue);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
 .fan-card label {
   display: grid;
   gap: 0.35rem;

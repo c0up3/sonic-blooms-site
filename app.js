@@ -329,10 +329,10 @@ function wireFanForm() {
   let turnstileWidgetId = null;
   let fanConfig = { signupsEnabled: true, turnstileSiteKey: "" };
 
-  const showWaitlisted = (text = "You are on the list. The Signal Room is open.") => {
+  const showWaitlisted = (text = "Check your email for your Signal Room confirmation code.") => {
     message.textContent = text;
     form.classList.add("is-waitlisted");
-    submitButton.textContent = "Member pass active";
+    submitButton.textContent = "Check your email";
     submitButton.disabled = true;
   };
 
@@ -407,7 +407,7 @@ function wireFanForm() {
         if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
         return;
       }
-      showWaitlisted("Check your email for your Signal Room confirmation code.");
+      showWaitlisted(data.message || "Check your email for your Signal Room confirmation code.");
     } catch (error) {
       message.textContent = "The members list could not be reached just now. Please try again in a moment.";
       submitButton.disabled = false;

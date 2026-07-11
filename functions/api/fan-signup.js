@@ -19,7 +19,7 @@ export async function onRequestPost({ request, env }) {
   const favourite = String(payload.favourite || "").trim().slice(0, 160);
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return new Response(JSON.stringify({ ok: false, message: "Add a valid email to unlock the vault." }), {
+    return new Response(JSON.stringify({ ok: false, message: "Add a valid email to enter the Signal Room." }), {
       status: 400,
       headers,
     });
@@ -76,10 +76,10 @@ export async function onRequestPost({ request, env }) {
       stored,
       emailSent,
       message: emailSent
-        ? "Vault unlocked. A signup notification was sent."
+        ? "Signal Room unlocked. Welcome in."
         : stored
-          ? "Vault unlocked. Signup stored; email notification needs the Cloudflare EMAIL binding."
-          : "Vault unlocked locally. Connect FAN_SIGNUPS and EMAIL in Cloudflare to store and notify.",
+          ? "Signal Room unlocked. New drops will appear here first."
+          : "Signal Room unlocked on this device. New drops will appear here first.",
       emailError,
     }),
     { headers },

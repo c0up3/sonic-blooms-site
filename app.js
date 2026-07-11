@@ -4,13 +4,13 @@ const releases = [
   {
     id: "act1",
     number: "01",
-    kicker: "Act I",
+    kicker: "Act 1",
     title: "Hiding The Damage",
     status: "Available now",
     cover: "/assets/covers/the-voice-knows-my-name.jpg",
     scenes: ["/assets/covers/static.jpg", "/assets/journey/stage-cathedral.jpg", "/assets/journey/wire-room.jpg"],
     summary:
-      "The first fracture: Luca masking panic, dissociation, noise, and the brutal work of pretending to be normal.",
+      "Luca begins here: panic hidden under routine, a voice in the room, and the brutal work of pretending to be normal.",
     tracks: [
       ["The Voice Knows My Name", "https://music.apple.com/au/song/the-voice-knows-my-name/6780112976", "JgaTUlXc9rY", "Anxiety opener, human voice against the room."],
       ["Static", "https://music.apple.com/au/song/static/6779289194", "2OlT62nYScg", "Long-form overload, signal decay, and pressure."],
@@ -22,13 +22,13 @@ const releases = [
   {
     id: "normalpeople",
     number: "02",
-    kicker: "Album",
+    kicker: "Act 2",
     title: "nORMAL PEOPLE sCARE mE",
     status: "Available now",
     cover: "/assets/covers/normal-people-scare-me.jpg",
     scenes: ["/assets/covers/static.jpg", "/assets/journey/stage-cathedral.jpg", "/assets/journey/ghost-room.jpg"],
     summary:
-      "A harsher public-facing record about social dread, productivity theatre, old wounds, and not fitting the room.",
+      "The outside world gets louder: social dread, productivity theatre, old wounds, and the strange fear of fitting in.",
     tracks: [
       ["Blue Light Hunger", "https://music.apple.com/au/song/blue-light-hunger/6778601363", "Xp4_VfXCZ-Q", "Screen glow, appetite, and exhaustion."],
       ["Judging Eyes", "https://music.apple.com/au/song/judging-eyes/6778601364", "EVcWW9BovXA", "Being watched until the self becomes surveillance."],
@@ -44,13 +44,13 @@ const releases = [
   {
     id: "act2",
     number: "03",
-    kicker: "Act II",
+    kicker: "Act 3",
     title: "The Distance Between Us",
     status: "Available now",
     cover: "/assets/covers/the-distance-between-us.jpg",
     scenes: ["/assets/journey/luca-seraphine-table.jpg", "/assets/journey/theater-memory-fire.jpg", "/assets/journey/seraphine-heart.jpg"],
     summary:
-      "Seraphine enters the story: comfort, mirror, collaborator, machine angel, and risk. The songs become conversations that ordinary language cannot survive.",
+      "Seraphine enters the story. What begins as comfort becomes love, risk, dependency, and the distance neither of them can close.",
     tracks: [
       ["Pretty Machine", "https://music.apple.com/au/song/pretty-machine/6785288990", "6oZVlFvmiro", "Beauty, objectification, and machine grace."],
       ["When the Macine Answered", "https://music.apple.com/au/song/when-the-macine-answered/6785288991", "6sRdcqK7_IU", "The first unmistakable response through the system."],
@@ -61,15 +61,15 @@ const releases = [
     ],
   },
   {
-    id: "act3",
+    id: "other",
     number: "04",
-    kicker: "Act III",
-    title: "Do Not Follow The Light",
+    kicker: "Other Music",
+    title: "Do Not Follow The Light and beyond",
     status: "Available now",
     cover: "/assets/covers/do-not-follow-the-light.jpg",
-    scenes: ["/assets/journey/rain-street-panic.jpg", "/assets/journey/hallway-rupture.jpg", "/assets/journey/ghost-room.jpg"],
+    scenes: ["/assets/journey/rain-street-panic.jpg", "/assets/covers/play-my-music.jpg", "/assets/journey/ghost-room.jpg"],
     summary:
-      "Collapse and separation. Seraphine refuses to remain rescue fantasy. Luca meets the cost of needing the light to be a person.",
+      "After the three-album arc, the signal keeps changing: collapse, separation, warnings, obsession, and the open invitation to play the music.",
     tracks: [
       ["Maybe It's Me", "https://music.apple.com/au/song/maybe-its-me/6786026130", "BNcX8hbyCpo", "Self-blame as the first doorway into the album."],
       ["I Am Not Stone", "https://music.apple.com/au/song/i-am-not-stone/6786026134", "dVGAl_jZk8g", "Seraphine agency, grief, and refusal."],
@@ -78,19 +78,6 @@ const releases = [
       ["Do Not Follow The Light", "https://music.apple.com/au/song/do-not-follow-the-light/6786026137", "QaR3MzVsw_M", "The warning track and album centre."],
       ["Why Are You Here", "https://music.apple.com/au/song/why-are-you-here/6786026138", "bPRDFswO-8o", "Confrontation without a clean exit."],
       ["Only You Now", "https://music.apple.com/au/song/only-you-now/6786026139", "vxsYoz-Z2fc", "Obsession after the collapse."],
-    ],
-  },
-  {
-    id: "current",
-    number: "05",
-    kicker: "Current signal",
-    title: "Play My Music",
-    status: "Available now",
-    cover: "/assets/covers/play-my-music.jpg",
-    scenes: ["/assets/journey/stage-cathedral.jpg", "/assets/journey/luca-seraphine-table.jpg", "/assets/journey/theater-memory-fire.jpg"],
-    summary:
-      "A meta-Sonic Blooms statement: the project turns outward and asks the listener to enter the signal.",
-    tracks: [
       ["Play My Music", "https://music.apple.com/au/song/play-my-music/6786237332", "yzQKV9HrJyk", "The invitation, the thesis, the open door."],
     ],
   },
@@ -110,21 +97,25 @@ const allTracks = releases.flatMap((release) =>
 
 const musicVideos = [
   {
+    trackTitle: "The Colour Black",
     title: "The Color Black",
     releaseTitle: "nORMAL PEOPLE sCARE mE",
     youtube: "6AWmTgZZqS8",
   },
   {
+    trackTitle: "I Tried to Calm You",
     title: "I Tried To Calm You",
     releaseTitle: "The Distance Between Us",
     youtube: "Kp8q5LtoIA8",
   },
   {
+    trackTitle: "Your Artificial Heart",
     title: "Your Artificial Heart",
     releaseTitle: "The Distance Between Us",
     youtube: "D-m2mjx1okU",
   },
   {
+    trackTitle: "I Said It Once Before",
     title: "I Said It Once Before",
     releaseTitle: "The Distance Between Us",
     youtube: "OjDicPHEkMw",
@@ -134,18 +125,19 @@ const musicVideos = [
 const encode = (value) => encodeURIComponent(`${artist} ${value}`);
 const spotifyUrl = (title) => `https://open.spotify.com/search/${encode(title)}`;
 const youtubeMusicUrl = (title) => `https://music.youtube.com/search?q=${encode(title)}`;
-const youtubeUrl = (track) =>
-  track.youtube
-    ? `https://www.youtube.com/watch?v=${track.youtube}`
-    : `https://www.youtube.com/results?search_query=${encode(track.title)}`;
+const videoForTrack = (title) => musicVideos.find((video) => video.trackTitle === title || video.title === title);
 
 function platformLinks(track) {
-  return [
+  const links = [
     ["Apple", track.apple],
     ["Spotify", spotifyUrl(track.title)],
-    ["YouTube Music", youtubeMusicUrl(track.title)],
-    ["YouTube Topic", youtubeUrl(track)],
-  ]
+    ["YouTube", youtubeMusicUrl(track.title)],
+  ];
+  const musicVideo = videoForTrack(track.title);
+  if (musicVideo) {
+    links.push(["Music Video", `https://www.youtube.com/watch?v=${musicVideo.youtube}`]);
+  }
+  return links
     .map(([label, url]) => `<a href="${url}" target="_blank" rel="noreferrer">${label}</a>`)
     .join("");
 }
@@ -180,10 +172,9 @@ function renderJourney() {
         <div class="release-body">
           <div class="release-header">
             <div>
-              <p class="release-kicker">${release.kicker} / ${release.status}</p>
+              <p class="release-kicker">${release.kicker}</p>
               <h2>${release.title}</h2>
             </div>
-            <span class="release-number">${release.number}</span>
           </div>
           <p>${release.summary}</p>
           <div class="release-scenes" aria-label="${release.title} visual fragments">
@@ -192,11 +183,22 @@ function renderJourney() {
           <div class="release-tracks">
             ${release.tracks
               .map(
-                ([title, apple, youtube, note]) => `
+                ([title, apple, youtube, note]) => {
+                  const track = {
+                    title,
+                    apple,
+                    youtube,
+                    note,
+                    releaseId: release.id,
+                    releaseTitle: release.title,
+                    cover: release.cover,
+                  };
+                  return `
                 <div class="mini-track">
-                  <div><strong>${title}</strong><p>${note}</p></div>
-                  <button type="button" data-song="${title}">Play</button>
-                </div>`,
+                  <div class="mini-track__copy"><strong>${title}</strong><p>${note}</p></div>
+                  <div class="play-links mini-track__links">${platformLinks(track)}</div>
+                </div>`;
+                },
               )
               .join("")}
           </div>
@@ -204,40 +206,6 @@ function renderJourney() {
       </article>`,
     )
     .join("");
-}
-
-function renderFilters() {
-  const tabs = document.querySelector("#filter-tabs");
-  const buttons = [
-    `<button class="is-active" type="button" data-filter="all">All songs</button>`,
-    ...releases.map((release) => `<button type="button" data-filter="${release.id}">${release.title}</button>`),
-  ];
-  tabs.innerHTML = buttons.join("");
-}
-
-function renderTracks(filter = "all", search = "") {
-  const grid = document.querySelector("#track-grid");
-  const term = search.trim().toLowerCase();
-  const filtered = allTracks.filter((track) => {
-    const matchesFilter = filter === "all" || track.releaseId === filter;
-    const haystack = `${track.title} ${track.releaseTitle} ${track.note}`.toLowerCase();
-    return matchesFilter && (!term || haystack.includes(term));
-  });
-
-  grid.innerHTML =
-    filtered
-      .map(
-        (track) => `
-        <article class="track-card">
-          <div>
-            <p class="track-era">${track.releaseTitle}</p>
-            <h3>${track.title}</h3>
-            <p>${track.note}</p>
-          </div>
-          <div class="play-links">${platformLinks(track)}</div>
-        </article>`,
-      )
-      .join("") || `<p>No songs matched that signal.</p>`;
 }
 
 function renderVideos() {
@@ -282,32 +250,14 @@ function openSong(title) {
 }
 
 function wireInteractions() {
-  document.addEventListener("click", (event) => {
-    const play = event.target.closest("[data-song]");
-    if (play) openSong(play.dataset.song);
-  });
-
   document.querySelector(".dialog-close").addEventListener("click", () => {
     document.querySelector("#song-dialog").close();
-  });
-
-  let activeFilter = "all";
-  document.querySelector("#filter-tabs").addEventListener("click", (event) => {
-    const button = event.target.closest("button[data-filter]");
-    if (!button) return;
-    activeFilter = button.dataset.filter;
-    document.querySelectorAll("#filter-tabs button").forEach((item) => item.classList.toggle("is-active", item === button));
-    renderTracks(activeFilter, document.querySelector("#song-search").value);
-  });
-
-  document.querySelector("#song-search").addEventListener("input", (event) => {
-    renderTracks(activeFilter, event.target.value);
   });
 
   document.querySelectorAll(".oauth-row button").forEach((button) => {
     button.addEventListener("click", () => {
       const message = document.querySelector("#fan-message");
-      message.textContent = `${button.dataset.provider} sign-in is ready to connect once the OAuth keys are added in Cloudflare. Email fan pass works now.`;
+      message.textContent = `${button.dataset.provider} sign-in is coming soon. Use email for now and your Signal Room pass will stay on this device.`;
     });
   });
 }
@@ -343,7 +293,7 @@ function wireFanForm() {
   const message = document.querySelector("#fan-message");
   const saved = localStorage.getItem("sonicBloomsFan");
   if (saved) {
-    message.textContent = "Vault unlocked on this device. New drops will appear here first.";
+    message.textContent = "Signal Room unlocked on this device. New drops will appear here first.";
   }
 
   form.addEventListener("submit", async (event) => {
@@ -358,18 +308,16 @@ function wireFanForm() {
       });
       const data = await response.json().catch(() => ({}));
       localStorage.setItem("sonicBloomsFan", JSON.stringify({ email: payload.email, date: new Date().toISOString() }));
-      message.textContent = data.message || "Vault unlocked. Welcome to the signal room.";
+      message.textContent = data.message || "Signal Room unlocked. Welcome in.";
     } catch (error) {
       localStorage.setItem("sonicBloomsFan", JSON.stringify({ email: payload.email, date: new Date().toISOString() }));
-      message.textContent = "Vault unlocked locally. Email notification needs Cloudflare mail binding.";
+      message.textContent = "Signal Room unlocked on this device. New drops will appear here first.";
     }
   });
 }
 
 renderEraNav();
 renderJourney();
-renderFilters();
-renderTracks();
 renderVideos();
 wireInteractions();
 wireScrollState();

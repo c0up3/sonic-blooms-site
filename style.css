@@ -145,9 +145,9 @@ button {
   position: absolute;
   inset: 0;
   z-index: -4;
-  background-image: url("/assets/journey/history-wall.jpg");
-  background-size: auto 100%;
-  background-position: calc(var(--scroll-progress, 0) * 100%) center;
+  background-image: url("/assets/journey/sonic-blooms-hero-luca-seraphine.jpg");
+  background-size: cover;
+  background-position: center;
   opacity: 0.92;
   transform: scale(1.03);
 }
@@ -456,9 +456,9 @@ p {
 
 .mini-track {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(14rem, 1fr) minmax(16rem, 25rem);
   gap: 1rem;
-  align-items: center;
+  align-items: start;
   border-left: 2px solid var(--brass);
   padding: 0.75rem 0 0.75rem 0.85rem;
   background: linear-gradient(90deg, rgba(201, 167, 107, 0.1), transparent);
@@ -468,15 +468,13 @@ p {
   overflow-wrap: anywhere;
 }
 
-.mini-track button {
-  border: 1px solid rgba(120, 216, 238, 0.45);
-  border-radius: 999px;
-  padding: 0.45rem 0.75rem;
-  background: rgba(120, 216, 238, 0.08);
-  color: var(--ink);
-  font-size: 0.82rem;
-  font-weight: 800;
-  cursor: pointer;
+.mini-track p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.mini-track__links {
+  grid-template-columns: repeat(auto-fit, minmax(7.2rem, 1fr));
 }
 
 .music-console,
@@ -814,6 +812,10 @@ p {
   }
 
   .release-scenes {
+    grid-template-columns: 1fr;
+  }
+
+  .mini-track {
     grid-template-columns: 1fr;
   }
 

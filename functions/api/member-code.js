@@ -60,7 +60,17 @@ export async function onRequestPost({ request, env }) {
       .bind(code, now, now, email)
       .run();
 
-    await sendMemberCodeEmail(env, { ...member, code, mode });
+    const emailSent = await sendMemberCodeEmail(env, { ...member, code, mode });
+    if (!emailSent) {
+      return json(
+        {
+          ok: false,
+          message: "The confirmation code could not be emailed right now. Please try again in a moment.",
+        },
+        502,
+        headers,
+      );
+    }
 
     return json(
       {
@@ -127,7 +137,12 @@ async function sendMemberCodeEmail(env, member) {
         body: JSON.stringify(message),
       },
     );
-    return response.ok;
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || data.success === false) {
+      console.error("Cloudflare Email Service REST member code send failed", data.errors || data);
+      return false;
+    }
+    return true;
   }
 
   return false;

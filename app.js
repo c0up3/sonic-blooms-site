@@ -407,6 +407,14 @@ function wireFanForm() {
         if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
         return;
       }
+      if (data.existing) {
+        message.textContent =
+          data.message ||
+          "An account already exists with that email. Go to member login and select Email my code to receive your confirmation code again.";
+        submitButton.disabled = false;
+        if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
+        return;
+      }
       showWaitlisted(data.message || "Check your email for your Signal Room confirmation code.");
     } catch (error) {
       message.textContent = "The members list could not be reached just now. Please try again in a moment.";

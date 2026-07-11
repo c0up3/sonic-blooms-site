@@ -59,6 +59,7 @@ const dialogPrev = document.querySelector("#dialog-prev");
 const dialogNext = document.querySelector("#dialog-next");
 const memberLoginForm = document.querySelector("#member-login-form");
 const memberLoginMessage = document.querySelector("#member-login-message");
+const memberSessionMessage = document.querySelector("#member-session-message");
 const forgotCodeButton = document.querySelector("#forgot-code");
 const resetCodeButton = document.querySelector("#reset-code");
 const signOutButton = document.querySelector("#sign-out");
@@ -153,6 +154,7 @@ function previous() {
 
 function setMemberMessage(text) {
   if (memberLoginMessage) memberLoginMessage.textContent = text;
+  if (memberSessionMessage) memberSessionMessage.textContent = text;
 }
 
 async function checkSession() {
@@ -242,6 +244,11 @@ memberLoginForm?.addEventListener("submit", async (event) => {
 
 forgotCodeButton?.addEventListener("click", async () => {
   const email = memberLoginForm?.querySelector('[name="email"]')?.value || "";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).trim())) {
+    setMemberMessage("Add the email you used to join the Signal Room first.");
+    memberLoginForm?.querySelector('[name="email"]')?.focus();
+    return;
+  }
   forgotCodeButton.disabled = true;
   setMemberMessage("Sending confirmation code...");
   try {

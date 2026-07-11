@@ -56,6 +56,20 @@ export async function onRequestPost({ request, env }) {
     return json({ ok: false, message: storage.message }, storage.status || 403, headers);
   }
 
+  if (storage.existing) {
+    return json(
+      {
+        ok: true,
+        stored: true,
+        existing: true,
+        message:
+          "An account already exists with that email. Go to member login and select Email my code to receive your confirmation code again.",
+      },
+      200,
+      headers,
+    );
+  }
+
   const emailSent = shouldNotify ? await sendSignupEmail(env, { ...signup, code: storage.code }) : false;
   const memberEmailSent =
     storage.stored && env.SEND_MEMBER_WELCOME !== "false"
@@ -70,7 +84,7 @@ export async function onRequestPost({ request, env }) {
       memberEmailSent,
       message: memberEmailSent
         ? "Check your email for your Signal Room confirmation code."
-        : "You are on the members list. Your confirmation code will be sent soon.",
+        : "You are on the members list, but the confirmation email could not be sent just now. Try Email my code on the member login page.",
     },
     200,
     headers,
@@ -196,6 +210,15 @@ async function storeSignup(env, signup) {
           blocked: true,
           status: 403,
           message: "This confirmation code has been revoked. Contact the band if this seems wrong.",
+        };
+      }
+
+      if (existing) {
+        return {
+          stored: true,
+          isNew: false,
+          existing: true,
+          code: existing.confirmation_code,
         };
       }
 

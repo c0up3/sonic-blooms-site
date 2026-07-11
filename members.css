@@ -208,6 +208,11 @@ button {
   font-weight: 800;
 }
 
+.member-session-panel .member-session-message {
+  color: var(--cyan);
+  font-weight: 700;
+}
+
 .eyebrow {
   margin: 0 0 0.75rem;
   color: var(--blue);

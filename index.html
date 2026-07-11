@@ -19,7 +19,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://sonic-blooms.com/" />
     <link rel="preload" href="/assets/journey/sonic-blooms-hero-luca-seraphine.jpg" as="image" />
-    <link rel="stylesheet" href="/style.css?v=20260711b" />
+    <link rel="stylesheet" href="/style.css?v=20260711c" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -162,13 +162,13 @@
             notes, and future drops from Luca, Seraphine, and the world around
             the music.
           </p>
-          <div class="vault-drops">
-            <a href="/assets/journey/history-wall.jpg" download>History wall wallpaper</a>
-            <a href="/assets/covers/do-not-follow-the-light.jpg" download>Do Not Follow cover download</a>
-            <a href="/assets/journey/rain-street-panic.jpg" download>Luca rain scene wallpaper</a>
+          <div class="vault-drops vault-teasers" aria-label="Signal Room unlock preview">
+            <span>Wallpapers</span>
+            <span>Cover image downloads</span>
+            <span>Story images</span>
           </div>
         </div>
-        <form id="fan-form" class="fan-card">
+        <form id="fan-form" class="fan-card" method="post" action="/api/fan-signup" novalidate>
           <div class="fan-card__top">
             <span>Free fan pass</span>
             <strong>Unlock Signal Room</strong>
@@ -197,6 +197,15 @@
             <button type="button" data-provider="Email">Email code</button>
           </div>
           <p id="fan-message" class="fan-message" role="status"></p>
+          <div id="unlock-panel" class="unlock-panel" hidden>
+            <strong>You are inside.</strong>
+            <p>Your Signal Room pass is saved on this device.</p>
+            <div class="vault-drops vault-downloads" aria-label="Unlocked Signal Room downloads">
+              <a href="/assets/journey/history-wall.jpg" download>Wallpapers</a>
+              <a href="/assets/covers/do-not-follow-the-light.jpg" download>Cover images</a>
+              <a href="/assets/journey/rain-street-panic.jpg" download>Story images</a>
+            </div>
+          </div>
         </form>
       </section>
 
@@ -207,6 +216,6 @@
       <div id="dialog-content"></div>
     </dialog>
 
-    <script src="/app.js?v=20260711b" defer></script>
+    <script src="/app.js?v=20260711c" defer></script>
   </body>
 </html>

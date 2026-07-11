@@ -664,6 +664,7 @@ p {
 }
 
 .vault-drops a,
+.vault-drops span,
 .oauth-row button {
   border: 1px solid rgba(255,255,255,0.16);
   border-radius: 999px;
@@ -672,6 +673,21 @@ p {
   color: var(--ink);
   font-size: 0.82rem;
   font-weight: 800;
+}
+
+.vault-teasers span {
+  position: relative;
+  border-color: rgba(201, 167, 107, 0.46);
+  color: var(--dim);
+}
+
+.vault-teasers span::before {
+  content: "Locked";
+  margin-right: 0.45rem;
+  color: var(--blue);
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
 }
 
 .fan-card {
@@ -712,6 +728,38 @@ p {
   margin: 0;
   color: var(--blue);
   font-size: 0.9rem;
+}
+
+.unlock-panel {
+  display: grid;
+  gap: 0.55rem;
+  border: 1px solid rgba(120, 216, 238, 0.36);
+  border-radius: 8px;
+  padding: 0.85rem;
+  background: rgba(120, 216, 238, 0.08);
+}
+
+.unlock-panel[hidden] {
+  display: none;
+}
+
+.unlock-panel p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.vault-downloads {
+  margin-top: 0.2rem;
+}
+
+.fan-card.is-unlocked label,
+.fan-card.is-unlocked .oauth-row {
+  display: none;
+}
+
+.fan-card button:disabled {
+  cursor: default;
+  opacity: 0.75;
 }
 
 .loop-grid {

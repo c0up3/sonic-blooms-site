@@ -309,14 +309,39 @@ function wireScrollState() {
 function wireFanForm() {
   const form = document.querySelector("#fan-form");
   const message = document.querySelector("#fan-message");
+  const unlockPanel = document.querySelector("#unlock-panel");
+  const submitButton = form.querySelector('button[type="submit"]');
+
+  const showUnlocked = (text = "Signal Room unlocked. Welcome in.") => {
+    message.textContent = text;
+    form.classList.add("is-unlocked");
+    unlockPanel.hidden = false;
+    submitButton.textContent = "Signal Room unlocked";
+    submitButton.disabled = true;
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.has("name") || params.has("email") || params.has("favourite")) {
+    history.replaceState(null, "", `${window.location.pathname}${window.location.hash || "#vault"}`);
+    message.textContent = "Almost there. Add a valid email address and enter the Signal Room.";
+  }
+
   const saved = localStorage.getItem("sonicBloomsFan");
   if (saved) {
-    message.textContent = "Signal Room unlocked on this device. New drops will appear here first.";
+    showUnlocked("Signal Room unlocked on this device. New drops will appear here first.");
   }
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const payload = Object.fromEntries(new FormData(form));
+    const email = String(payload.email || "").trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      message.textContent = "Add a full email address, like name@example.com.";
+      form.querySelector('[name="email"]').focus();
+      return;
+    }
+
+    submitButton.disabled = true;
     message.textContent = "Sending signal...";
     try {
       const response = await fetch("/api/fan-signup", {
@@ -325,11 +350,16 @@ function wireFanForm() {
         body: JSON.stringify(payload),
       });
       const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.ok === false) {
+        message.textContent = data.message || "Add a valid email address to enter the Signal Room.";
+        submitButton.disabled = false;
+        return;
+      }
       localStorage.setItem("sonicBloomsFan", JSON.stringify({ email: payload.email, date: new Date().toISOString() }));
-      message.textContent = data.message || "Signal Room unlocked. Welcome in.";
+      showUnlocked(data.message || "Signal Room unlocked. Welcome in.");
     } catch (error) {
       localStorage.setItem("sonicBloomsFan", JSON.stringify({ email: payload.email, date: new Date().toISOString() }));
-      message.textContent = "Signal Room unlocked on this device. New drops will appear here first.";
+      showUnlocked("Signal Room unlocked on this device. New drops will appear here first.");
     }
   });
 }

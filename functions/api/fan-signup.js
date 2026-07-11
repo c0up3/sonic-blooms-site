@@ -6,7 +6,12 @@ export async function onRequestPost({ request, env }) {
 
   let payload;
   try {
-    payload = await request.json();
+    const contentType = request.headers.get("content-type") || "";
+    if (contentType.includes("application/json")) {
+      payload = await request.json();
+    } else {
+      payload = Object.fromEntries(await request.formData());
+    }
   } catch {
     return new Response(JSON.stringify({ ok: false, message: "Invalid signup payload." }), {
       status: 400,

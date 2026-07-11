@@ -22,8 +22,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy . --project-name=sonic-blooms --branch=main
+        run: npx wrangler@latest pages deploy . --project-name=sonic-blooms --branch=main
+        env:
+          CLOUDFLARE_ACCOUNT_ID: a1196faf7936d80af18210aee09527d3
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}

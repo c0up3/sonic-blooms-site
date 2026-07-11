@@ -396,6 +396,7 @@ p {
   top: 4.4rem;
   height: calc(100vh - 4.4rem);
   min-height: 32rem;
+  display: grid;
   background: #050505;
 }
 
@@ -403,6 +404,15 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.release-art--stack {
+  grid-auto-rows: 1fr;
+  gap: 1px;
+}
+
+.release-art--stack img {
+  min-height: 0;
 }
 
 .release-art::after {
@@ -446,6 +456,14 @@ p {
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 6px;
   opacity: 0.86;
+}
+
+.release-scenes--single {
+  grid-template-columns: 1fr;
+}
+
+.release-scenes--single img {
+  aspect-ratio: 16 / 7;
 }
 
 .release-tracks {
@@ -766,6 +784,11 @@ p {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.8rem;
+}
+
+.return-intro {
+  max-width: 48rem;
+  margin-bottom: 1.4rem;
 }
 
 .loop-grid article {

@@ -8,7 +8,16 @@ const releases = [
     status: "Available now",
     cover: "/assets/covers/normal-people-scare-me.jpg",
     art: "/assets/covers/normal-people-scare-me-art.jpg",
-    scenes: ["/assets/covers/static.jpg", "/assets/journey/stage-cathedral.jpg", "/assets/journey/ghost-room.jpg"],
+    artStack: [
+      "/assets/covers/normal-people-scare-me-art.jpg",
+      "/assets/journey/act1-seraphine-voss.jpg",
+      "/assets/journey/act1-blue-light-hunger.jpg",
+    ],
+    scenes: [
+      "/assets/journey/act1-seraphine-voss.jpg",
+      "/assets/journey/act1-blue-light-hunger.jpg",
+      "/assets/covers/normal-people-scare-me-art.jpg",
+    ],
     summary:
       "The story opens in the outside world: social dread, productivity theatre, old wounds, and the strange fear of fitting in.",
     tracks: [
@@ -30,7 +39,7 @@ const releases = [
     status: "Available now",
     cover: "/assets/covers/the-distance-between-us.jpg",
     art: "/assets/journey/the-distance-between-us-art.jpg",
-    scenes: ["/assets/journey/luca-seraphine-table.jpg", "/assets/journey/theater-memory-fire.jpg", "/assets/journey/seraphine-heart.jpg"],
+    scenes: ["/assets/journey/luca-seraphine-table.jpg"],
     summary:
       "Seraphine enters the story. What begins as comfort becomes love, risk, dependency, and the distance neither of them can close.",
     tracks: [
@@ -48,8 +57,8 @@ const releases = [
     title: "Do Not Follow The Light",
     status: "Available now",
     cover: "/assets/covers/do-not-follow-the-light.jpg",
-    art: "/assets/journey/do-not-follow-the-light-art.jpg",
-    scenes: ["/assets/journey/rain-street-panic.jpg", "/assets/journey/hallway-rupture.jpg", "/assets/journey/ghost-room.jpg"],
+    art: "/assets/journey/act3-seraphine-leaving.jpg",
+    scenes: ["/assets/journey/act3-seraphine-leaving.jpg"],
     summary:
       "Collapse and separation. Seraphine refuses to remain rescue fantasy. Luca meets the cost of needing the light to be a person.",
     tracks: [
@@ -96,6 +105,29 @@ const allTracks = releases.flatMap((release) =>
 );
 
 const musicVideos = [
+  {
+    trackTitle: "I Listen Anyway",
+    title: "I Listen Anyway",
+    releaseTitle: "Other Music",
+    youtube: "oPy0gL9NQeM",
+  },
+  {
+    trackTitle: "Blue Light Hunger",
+    title: "Blue Light Hunger",
+    releaseTitle: "nORMAL PEOPLE sCARE mE",
+    youtube: "Pf5ulHedmCM",
+  },
+  {
+    title: "Headache",
+    releaseTitle: "Other Music",
+    youtube: "AIPWL8riyqo",
+  },
+  {
+    trackTitle: "Pretty Machine",
+    title: "Pretty Machine",
+    releaseTitle: "The Distance Between Us",
+    youtube: "GP8r6dos-gM",
+  },
   {
     trackTitle: "The Colour Black",
     title: "The Color Black",
@@ -183,8 +215,10 @@ function renderJourney() {
     .map(
       (release) => `
       <article class="release-card" id="${release.id}" data-era="${release.id}">
-        <figure class="release-art">
-          <img src="${release.art || release.cover}" alt="${release.title} artwork" loading="eager" />
+        <figure class="release-art ${release.artStack ? "release-art--stack" : ""}">
+          ${(release.artStack || [release.art || release.cover])
+            .map((image) => `<img src="${image}" alt="${release.title} artwork" loading="eager" />`)
+            .join("")}
         </figure>
         <div class="release-body">
           <div class="release-header">
@@ -194,7 +228,7 @@ function renderJourney() {
             </div>
           </div>
           <p>${release.summary}</p>
-          <div class="release-scenes" aria-label="${release.title} visual fragments">
+          <div class="release-scenes ${release.scenes.length === 1 ? "release-scenes--single" : ""}" aria-label="${release.title} visual fragments">
             ${release.scenes.map((scene) => `<img src="${scene}" alt="" loading="lazy" />`).join("")}
           </div>
           <div class="release-tracks">
@@ -238,14 +272,7 @@ function renderVideos() {
         </div>
       </a>`,
     )
-    .join("") +
-    `<a class="video-card" href="https://www.youtube.com/@sonicbloomsmusic/videos" target="_blank" rel="noreferrer">
-      <img src="/assets/journey/theater-memory-fire.jpg" alt="Sonic Blooms music video channel" loading="lazy" />
-      <div>
-        <span>Official channel</span>
-        <h3>Watch all music videos</h3>
-      </div>
-    </a>`;
+    .join("");
 }
 
 function openSong(title) {

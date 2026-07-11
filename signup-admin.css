@@ -1,0 +1,101 @@
+.admin-page {
+  min-height: 100svh;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.72), #050505 42%),
+    url("/assets/journey/history-wall.jpg") center / cover fixed;
+}
+
+.admin-shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 5rem) 0;
+}
+
+.admin-hero {
+  max-width: 52rem;
+  padding-top: clamp(2rem, 6vw, 4rem);
+}
+
+.admin-hero h1 {
+  max-width: 10ch;
+}
+
+.admin-panel,
+.admin-table-wrap {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(5,5,5,0.86);
+  backdrop-filter: blur(8px);
+}
+
+.admin-panel {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+}
+
+.admin-panel label {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--dim);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.admin-panel input {
+  width: min(38rem, 100%);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 7px;
+  padding: 0.85rem;
+  background: rgba(0,0,0,0.52);
+  color: var(--ink);
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.admin-table-wrap {
+  padding: 1rem;
+}
+
+.admin-table-wrap h2 {
+  font-size: clamp(1.6rem, 4vw, 3rem);
+}
+
+.admin-table-scroller {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  border-bottom: 1px solid rgba(201, 167, 107, 0.2);
+  padding: 0.8rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.admin-table th {
+  color: var(--blue);
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.admin-table td {
+  color: var(--muted);
+}
+
+.admin-table strong {
+  color: var(--ink);
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Sonic Blooms | Signup Viewer</title>
+    <link rel="stylesheet" href="/style.css?v=20260711f" />
+    <link rel="stylesheet" href="/signup-admin.css?v=20260711a" />
+  </head>
+  <body class="admin-page">
+    <main class="admin-shell">
+      <section class="admin-hero" aria-labelledby="admin-title">
+        <p class="eyebrow">Private</p>
+        <h1 id="admin-title">Signup Viewer</h1>
+        <p>See who has joined the Sonic Blooms members waitlist.</p>
+      </section>
+
+      <section class="admin-panel" aria-label="Admin access">
+        <label>
+          Admin access code
+          <input id="admin-token" type="password" autocomplete="off" placeholder="Paste access code" />
+        </label>
+        <div class="admin-actions">
+          <button id="load-signups" class="button button--primary" type="button">Load signups</button>
+          <button id="clear-code" class="button button--ghost" type="button">Forget code</button>
+          <button id="export-csv" class="button button--ghost" type="button" disabled>Export CSV</button>
+        </div>
+        <p id="admin-message" class="fan-message" role="status"></p>
+      </section>
+
+      <section class="admin-table-wrap" aria-labelledby="signup-count-title">
+        <h2 id="signup-count-title">Waitlist</h2>
+        <div class="admin-table-scroller">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Favourite signal</th>
+                <th>Status</th>
+                <th>Joined</th>
+                <th>Updated</th>
+              </tr>
+            </thead>
+            <tbody id="signup-rows">
+              <tr>
+                <td colspan="6">Enter the admin access code to load the list.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/signup-admin.js?v=20260711a" defer></script>
+  </body>
+</html>

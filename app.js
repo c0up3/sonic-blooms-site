@@ -214,12 +214,7 @@ function renderJourney() {
   stack.innerHTML = releases
     .map(
       (release) => `
-      <article class="release-card" id="${release.id}" data-era="${release.id}">
-        <figure class="release-art ${release.artStack ? "release-art--stack" : ""}">
-          ${(release.artStack || [release.art || release.cover])
-            .map((image) => `<img src="${image}" alt="${release.title} artwork" loading="eager" />`)
-            .join("")}
-        </figure>
+      <article class="release-card" id="${release.id}" data-era="${release.id}" style="--release-bg: url('${release.art || release.cover}')">
         <div class="release-body">
           <div class="release-header">
             <div>
@@ -296,13 +291,6 @@ function openSong(title) {
 function wireInteractions() {
   document.querySelector(".dialog-close").addEventListener("click", () => {
     document.querySelector("#song-dialog").close();
-  });
-
-  document.querySelectorAll(".oauth-row button").forEach((button) => {
-    button.addEventListener("click", () => {
-      const message = document.querySelector("#fan-message");
-      message.textContent = `${button.dataset.provider} sign-in is coming soon. The members room will only open after protected sign-in is connected.`;
-    });
   });
 }
 

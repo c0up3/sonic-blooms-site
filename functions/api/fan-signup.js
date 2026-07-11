@@ -49,13 +49,13 @@ export async function onRequestPost({ request, env }) {
     userAgent: request.headers.get("user-agent") || "",
   };
 
-  const stored = await storeSignup(env, signup);
-  const emailSent = await sendSignupEmail(env, signup);
+  const storage = await storeSignup(env, signup);
+  const emailSent = storage.isNew || env.NOTIFY_REPEAT_SIGNUPS === "true" ? await sendSignupEmail(env, signup) : false;
 
   return json(
     {
       ok: true,
-      stored,
+      stored: storage.stored,
       emailSent,
       message: "You are on the list. Members access opens soon.",
     },
@@ -157,6 +157,7 @@ async function recordAttempt(env, ipHash, email, accepted) {
 async function storeSignup(env, signup) {
   if (env.DB) {
     try {
+      const existing = await env.DB.prepare("SELECT email FROM members WHERE email = ?").bind(signup.email).first();
       await env.DB.prepare(
         `INSERT INTO members (email, name, favourite, status, created_at, updated_at)
          VALUES (?, ?, ?, 'waitlist', ?, ?)
@@ -167,7 +168,7 @@ async function storeSignup(env, signup) {
       )
         .bind(signup.email, signup.name, signup.favourite, signup.createdAt, signup.createdAt)
         .run();
-      return true;
+      return { stored: true, isNew: !existing };
     } catch (error) {
       console.error("D1 signup storage failed", error);
     }
@@ -175,41 +176,71 @@ async function storeSignup(env, signup) {
 
   if (env.FAN_SIGNUPS && typeof env.FAN_SIGNUPS.put === "function") {
     await env.FAN_SIGNUPS.put(`signup:${signup.createdAt}:${signup.email}`, JSON.stringify(signup));
-    return true;
+    return { stored: true, isNew: true };
+  }
+
+  return { stored: false, isNew: false };
+}
+
+async function sendSignupEmail(env, signup) {
+  const message = buildSignupEmail(env, signup);
+  try {
+    if (env.EMAIL && typeof env.EMAIL.send === "function") {
+      await env.EMAIL.send(message);
+      return true;
+    }
+
+    if (env.CLOUDFLARE_EMAIL_API_TOKEN && env.CLOUDFLARE_ACCOUNT_ID) {
+      return await sendViaEmailServiceRest(env, message);
+    }
+  } catch (error) {
+    console.error("Signup email failed", error);
   }
 
   return false;
 }
 
-async function sendSignupEmail(env, signup) {
-  if (!env.EMAIL || typeof env.EMAIL.send !== "function") return false;
+function buildSignupEmail(env, signup) {
+  return {
+    to: env.SIGNUP_NOTIFY_TO || "band@sonic-blooms.com",
+    from: env.SIGNUP_NOTIFY_FROM || "fans@sonic-blooms.com",
+    subject: "New Sonic Blooms members waitlist signup",
+    text: [
+      "New Sonic Blooms members waitlist signup",
+      "",
+      `Name: ${signup.name || "(not provided)"}`,
+      `Email: ${signup.email}`,
+      `Favourite signal: ${signup.favourite || "(not provided)"}`,
+      `Created: ${signup.createdAt}`,
+    ].join("\n"),
+    html: `
+      <h1>New Sonic Blooms members waitlist signup</h1>
+      <p><strong>Name:</strong> ${escapeHtml(signup.name || "(not provided)")}</p>
+      <p><strong>Email:</strong> ${escapeHtml(signup.email)}</p>
+      <p><strong>Favourite signal:</strong> ${escapeHtml(signup.favourite || "(not provided)")}</p>
+      <p><strong>Created:</strong> ${escapeHtml(signup.createdAt)}</p>
+    `,
+  };
+}
 
-  try {
-    await env.EMAIL.send({
-      to: env.SIGNUP_NOTIFY_TO || "band@sonic-blooms.com",
-      from: env.SIGNUP_NOTIFY_FROM || "fans@sonic-blooms.com",
-      subject: "New Sonic Blooms members waitlist signup",
-      text: [
-        "New Sonic Blooms members waitlist signup",
-        "",
-        `Name: ${signup.name || "(not provided)"}`,
-        `Email: ${signup.email}`,
-        `Favourite signal: ${signup.favourite || "(not provided)"}`,
-        `Created: ${signup.createdAt}`,
-      ].join("\n"),
-      html: `
-        <h1>New Sonic Blooms members waitlist signup</h1>
-        <p><strong>Name:</strong> ${escapeHtml(signup.name || "(not provided)")}</p>
-        <p><strong>Email:</strong> ${escapeHtml(signup.email)}</p>
-        <p><strong>Favourite signal:</strong> ${escapeHtml(signup.favourite || "(not provided)")}</p>
-        <p><strong>Created:</strong> ${escapeHtml(signup.createdAt)}</p>
-      `,
-    });
-    return true;
-  } catch (error) {
-    console.error("Signup email failed", error);
+async function sendViaEmailServiceRest(env, message) {
+  const response = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/email/sending/send`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.CLOUDFLARE_EMAIL_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(message),
+    },
+  );
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok || data.success === false) {
+    console.error("Cloudflare Email Service REST send failed", data.errors || data);
     return false;
   }
+  return true;
 }
 
 async function sha256(value) {

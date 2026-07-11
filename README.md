@@ -13,4 +13,4 @@ Fan signup:
 - Frontend posts to `/api/fan-signup`.
 - Optional KV binding: `FAN_SIGNUPS`.
 - Optional Cloudflare Email Service send binding: `EMAIL`.
-- Optional variables: `SIGNUP_NOTIFY_TO`, `SIGNUP_NOTIFY_FROM`.
+- Optional variables: `SIGNUP_NOTIFY_TO`, `SIGNUP_NOTIFY_FROM`. Signup notifications default to `band@sonic-blooms.com`.

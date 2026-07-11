@@ -44,7 +44,7 @@ export async function onRequestPost({ request, env }) {
   if (env.EMAIL && typeof env.EMAIL.send === "function") {
     try {
       await env.EMAIL.send({
-        to: env.SIGNUP_NOTIFY_TO || "dcoupe@mac.com",
+        to: env.SIGNUP_NOTIFY_TO || "band@sonic-blooms.com",
         from: env.SIGNUP_NOTIFY_FROM || "fans@sonic-blooms.com",
         subject: "New Sonic Blooms fan signup",
         text: [

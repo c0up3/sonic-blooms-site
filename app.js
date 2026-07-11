@@ -378,7 +378,7 @@ function wireFanForm() {
     const payload = Object.fromEntries(new FormData(form));
     const email = String(payload.email || "").trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      message.textContent = "Add a full email address, like name@example.com.";
+      message.textContent = "Add a valid email address.";
       form.querySelector('[name="email"]').focus();
       return;
     }
@@ -407,7 +407,7 @@ function wireFanForm() {
         if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
         return;
       }
-      showWaitlisted("You are on the list. The Signal Room is open.");
+      showWaitlisted("Check your email for your Signal Room confirmation code.");
     } catch (error) {
       message.textContent = "The members list could not be reached just now. Please try again in a moment.";
       submitButton.disabled = false;

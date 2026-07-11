@@ -466,7 +466,10 @@ p {
 }
 
 .release-scenes--single img {
-  aspect-ratio: 16 / 7;
+  max-height: 18rem;
+  aspect-ratio: 16 / 8;
+  object-fit: contain;
+  background: rgba(0,0,0,0.72);
 }
 
 .release-tracks {
@@ -732,15 +735,6 @@ p {
   color: var(--dim);
 }
 
-.vault-teasers span::before {
-  content: "Locked";
-  margin-right: 0.45rem;
-  color: var(--blue);
-  font-family: Consolas, "SFMono-Regular", monospace;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-}
-
 .fan-card {
   display: grid;
   gap: 0.8rem;
@@ -802,13 +796,6 @@ p {
 .unlock-panel p {
   margin: 0;
   font-size: 0.9rem;
-}
-
-.unlock-panel a {
-  width: fit-content;
-  border-bottom: 1px solid rgba(201, 167, 107, 0.8);
-  color: var(--ink);
-  font-weight: 800;
 }
 
 .fan-card.is-waitlisted label {

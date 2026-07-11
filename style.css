@@ -764,6 +764,22 @@ p {
   text-transform: uppercase;
 }
 
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.turnstile-slot {
+  min-height: 4.3rem;
+}
+
+.turnstile-slot[hidden] {
+  display: none;
+}
+
 .oauth-row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

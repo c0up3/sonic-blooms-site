@@ -337,6 +337,9 @@ function wireFanForm() {
   const form = document.querySelector("#fan-form");
   const message = document.querySelector("#fan-message");
   const submitButton = form.querySelector('button[type="submit"]');
+  const turnstileSlot = document.querySelector("#turnstile-slot");
+  let turnstileWidgetId = null;
+  let fanConfig = { signupsEnabled: true, turnstileSiteKey: "" };
 
   const showWaitlisted = (text = "You are on the list. Members access opens soon.") => {
     message.textContent = text;
@@ -351,6 +354,37 @@ function wireFanForm() {
     message.textContent = "Almost there. Add a valid email address to join the members waitlist.";
   }
 
+  const loadTurnstile = (siteKey) => {
+    if (!siteKey || !turnstileSlot || window.turnstile) return;
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      turnstileSlot.hidden = false;
+      turnstileWidgetId = window.turnstile.render(turnstileSlot, {
+        sitekey: siteKey,
+        theme: "dark",
+      });
+    };
+    document.head.append(script);
+  };
+
+  fetch("/api/fan-config", { headers: { Accept: "application/json" } })
+    .then((response) => response.json())
+    .then((config) => {
+      fanConfig = { ...fanConfig, ...config };
+      if (!fanConfig.signupsEnabled) {
+        message.textContent = "The members waitlist is paused for a moment.";
+        submitButton.disabled = true;
+        return;
+      }
+      loadTurnstile(fanConfig.turnstileSiteKey);
+    })
+    .catch(() => {
+      message.textContent = "The waitlist is available, but bot protection settings could not be checked.";
+    });
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const payload = Object.fromEntries(new FormData(form));
@@ -359,6 +393,15 @@ function wireFanForm() {
       message.textContent = "Add a full email address, like name@example.com.";
       form.querySelector('[name="email"]').focus();
       return;
+    }
+
+    if (fanConfig.turnstileSiteKey) {
+      const token = window.turnstile && turnstileWidgetId !== null ? window.turnstile.getResponse(turnstileWidgetId) : "";
+      if (!token) {
+        message.textContent = "Complete the bot check before joining the waitlist.";
+        return;
+      }
+      payload.turnstileToken = token;
     }
 
     submitButton.disabled = true;
@@ -373,12 +416,14 @@ function wireFanForm() {
       if (!response.ok || data.ok === false) {
         message.textContent = data.message || "Add a valid email address to join the members waitlist.";
         submitButton.disabled = false;
+        if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
         return;
       }
       showWaitlisted("You are on the list. Members access opens soon.");
     } catch (error) {
       message.textContent = "The waitlist could not be reached just now. Please try again in a moment.";
       submitButton.disabled = false;
+      if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
     }
   });
 }

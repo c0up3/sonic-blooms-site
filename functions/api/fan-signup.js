@@ -1,33 +1,44 @@
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const RATE_WINDOW_MS = 60 * 60 * 1000;
+const MAX_IP_ATTEMPTS = 20;
+const MAX_EMAIL_ATTEMPTS = 5;
+
 export async function onRequestPost({ request, env }) {
   const headers = {
     "content-type": "application/json; charset=utf-8",
     "cache-control": "no-store",
   };
 
-  let payload;
-  try {
-    const contentType = request.headers.get("content-type") || "";
-    if (contentType.includes("application/json")) {
-      payload = await request.json();
-    } else {
-      payload = Object.fromEntries(await request.formData());
-    }
-  } catch {
-    return new Response(JSON.stringify({ ok: false, message: "Invalid signup payload." }), {
-      status: 400,
-      headers,
-    });
+  if (env.SIGNUPS_ENABLED === "false") {
+    return json({ ok: false, message: "The members waitlist is paused for a moment." }, 503, headers);
+  }
+
+  const payload = await readPayload(request);
+  if (!payload) {
+    return json({ ok: false, message: "Invalid signup payload." }, 400, headers);
+  }
+
+  if (String(payload.website || "").trim()) {
+    return json({ ok: true, message: "You are on the list. Members access opens soon." }, 200, headers);
   }
 
   const email = String(payload.email || "").trim().toLowerCase();
   const name = String(payload.name || "").trim().slice(0, 120);
   const favourite = String(payload.favourite || "").trim().slice(0, 160);
+  const turnstileToken = String(payload.turnstileToken || payload["cf-turnstile-response"] || "").trim();
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return new Response(JSON.stringify({ ok: false, message: "Add a valid email to join the members waitlist." }), {
-      status: 400,
-      headers,
-    });
+  if (!EMAIL_RE.test(email)) {
+    return json({ ok: false, message: "Add a valid email to join the members waitlist." }, 400, headers);
+  }
+
+  const turnstile = await verifyTurnstile(env, request, turnstileToken);
+  if (!turnstile.ok) {
+    return json({ ok: false, message: turnstile.message }, 403, headers);
+  }
+
+  const rateLimit = await checkRateLimit(env, request, email);
+  if (!rateLimit.ok) {
+    return json({ ok: false, message: rateLimit.message }, 429, headers);
   }
 
   const signup = {
@@ -38,63 +49,177 @@ export async function onRequestPost({ request, env }) {
     userAgent: request.headers.get("user-agent") || "",
   };
 
-  let stored = false;
-  if (env.FAN_SIGNUPS && typeof env.FAN_SIGNUPS.put === "function") {
-    await env.FAN_SIGNUPS.put(`signup:${signup.createdAt}:${email}`, JSON.stringify(signup));
-    stored = true;
-  }
+  const stored = await storeSignup(env, signup);
+  const emailSent = await sendSignupEmail(env, signup);
 
-  let emailSent = false;
-  let emailError = "";
-  if (env.EMAIL && typeof env.EMAIL.send === "function") {
-    try {
-      await env.EMAIL.send({
-        to: env.SIGNUP_NOTIFY_TO || "band@sonic-blooms.com",
-        from: env.SIGNUP_NOTIFY_FROM || "fans@sonic-blooms.com",
-        subject: "New Sonic Blooms members waitlist signup",
-        text: [
-          "New Sonic Blooms members waitlist signup",
-          "",
-          `Name: ${name || "(not provided)"}`,
-          `Email: ${email}`,
-          `Favourite signal: ${favourite || "(not provided)"}`,
-          `Created: ${signup.createdAt}`,
-        ].join("\n"),
-        html: `
-          <h1>New Sonic Blooms members waitlist signup</h1>
-          <p><strong>Name:</strong> ${escapeHtml(name || "(not provided)")}</p>
-          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-          <p><strong>Favourite signal:</strong> ${escapeHtml(favourite || "(not provided)")}</p>
-          <p><strong>Created:</strong> ${escapeHtml(signup.createdAt)}</p>
-        `,
-      });
-      emailSent = true;
-    } catch (error) {
-      emailError = error?.message || "Email send failed.";
-      console.error("Signup email failed", error);
-    }
-  }
-
-  return new Response(
-    JSON.stringify({
+  return json(
+    {
       ok: true,
       stored,
       emailSent,
-      message: emailSent
-        ? "You are on the list. Members access opens soon."
-        : stored
-          ? "You are on the list. Members access opens soon."
-          : "You are on the list. Members access opens soon.",
-      emailError,
-    }),
-    { headers },
+      message: "You are on the list. Members access opens soon.",
+    },
+    200,
+    headers,
   );
 }
 
 export async function onRequestGet() {
-  return new Response(JSON.stringify({ ok: true, message: "Sonic Blooms fan signup endpoint." }), {
+  return new Response(JSON.stringify({ ok: true, message: "Sonic Blooms members waitlist endpoint." }), {
     headers: { "content-type": "application/json; charset=utf-8" },
   });
+}
+
+async function readPayload(request) {
+  try {
+    const contentType = request.headers.get("content-type") || "";
+    if (contentType.includes("application/json")) {
+      return await request.json();
+    }
+    return Object.fromEntries(await request.formData());
+  } catch {
+    return null;
+  }
+}
+
+async function verifyTurnstile(env, request, token) {
+  if (!env.TURNSTILE_SECRET_KEY) {
+    return env.REQUIRE_TURNSTILE === "true"
+      ? { ok: false, message: "Bot protection is being set up. Please try again soon." }
+      : { ok: true };
+  }
+
+  if (!token) {
+    return { ok: false, message: "Complete the bot check before joining the waitlist." };
+  }
+
+  const formData = new FormData();
+  formData.append("secret", env.TURNSTILE_SECRET_KEY);
+  formData.append("response", token);
+  formData.append("remoteip", request.headers.get("cf-connecting-ip") || "");
+
+  const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    body: formData,
+  });
+  const data = await response.json().catch(() => ({}));
+  return data.success ? { ok: true } : { ok: false, message: "The bot check did not pass. Please try again." };
+}
+
+async function checkRateLimit(env, request, email) {
+  if (!env.DB) return { ok: true };
+
+  try {
+    const now = Date.now();
+    const cutoff = new Date(now - RATE_WINDOW_MS).toISOString();
+    const ipHash = await sha256(request.headers.get("cf-connecting-ip") || "unknown");
+
+    const [ipRow, emailRow] = await Promise.all([
+      env.DB.prepare(
+        "SELECT COUNT(*) AS count FROM signup_attempts WHERE ip_hash = ? AND created_at >= ?",
+      )
+        .bind(ipHash, cutoff)
+        .first(),
+      env.DB.prepare(
+        "SELECT COUNT(*) AS count FROM signup_attempts WHERE email = ? AND created_at >= ?",
+      )
+        .bind(email, cutoff)
+        .first(),
+    ]);
+
+    if ((ipRow?.count || 0) >= MAX_IP_ATTEMPTS) {
+      await recordAttempt(env, ipHash, email, false);
+      return { ok: false, message: "Too many attempts from this connection. Try again later." };
+    }
+
+    if ((emailRow?.count || 0) >= MAX_EMAIL_ATTEMPTS) {
+      await recordAttempt(env, ipHash, email, false);
+      return { ok: false, message: "Too many attempts for this email. Try again later." };
+    }
+
+    await recordAttempt(env, ipHash, email, true);
+    return { ok: true };
+  } catch (error) {
+    console.error("Signup rate limit unavailable", error);
+    return { ok: true };
+  }
+}
+
+async function recordAttempt(env, ipHash, email, accepted) {
+  if (!env.DB) return;
+  await env.DB.prepare(
+    "INSERT INTO signup_attempts (ip_hash, email, action, accepted, created_at) VALUES (?, ?, ?, ?, ?)",
+  )
+    .bind(ipHash, email, "waitlist", accepted ? 1 : 0, new Date().toISOString())
+    .run();
+}
+
+async function storeSignup(env, signup) {
+  if (env.DB) {
+    try {
+      await env.DB.prepare(
+        `INSERT INTO members (email, name, favourite, status, created_at, updated_at)
+         VALUES (?, ?, ?, 'waitlist', ?, ?)
+         ON CONFLICT(email) DO UPDATE SET
+           name = excluded.name,
+           favourite = excluded.favourite,
+           updated_at = excluded.updated_at`,
+      )
+        .bind(signup.email, signup.name, signup.favourite, signup.createdAt, signup.createdAt)
+        .run();
+      return true;
+    } catch (error) {
+      console.error("D1 signup storage failed", error);
+    }
+  }
+
+  if (env.FAN_SIGNUPS && typeof env.FAN_SIGNUPS.put === "function") {
+    await env.FAN_SIGNUPS.put(`signup:${signup.createdAt}:${signup.email}`, JSON.stringify(signup));
+    return true;
+  }
+
+  return false;
+}
+
+async function sendSignupEmail(env, signup) {
+  if (!env.EMAIL || typeof env.EMAIL.send !== "function") return false;
+
+  try {
+    await env.EMAIL.send({
+      to: env.SIGNUP_NOTIFY_TO || "band@sonic-blooms.com",
+      from: env.SIGNUP_NOTIFY_FROM || "fans@sonic-blooms.com",
+      subject: "New Sonic Blooms members waitlist signup",
+      text: [
+        "New Sonic Blooms members waitlist signup",
+        "",
+        `Name: ${signup.name || "(not provided)"}`,
+        `Email: ${signup.email}`,
+        `Favourite signal: ${signup.favourite || "(not provided)"}`,
+        `Created: ${signup.createdAt}`,
+      ].join("\n"),
+      html: `
+        <h1>New Sonic Blooms members waitlist signup</h1>
+        <p><strong>Name:</strong> ${escapeHtml(signup.name || "(not provided)")}</p>
+        <p><strong>Email:</strong> ${escapeHtml(signup.email)}</p>
+        <p><strong>Favourite signal:</strong> ${escapeHtml(signup.favourite || "(not provided)")}</p>
+        <p><strong>Created:</strong> ${escapeHtml(signup.createdAt)}</p>
+      `,
+    });
+    return true;
+  } catch (error) {
+    console.error("Signup email failed", error);
+    return false;
+  }
+}
+
+async function sha256(value) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+function json(body, status, headers) {
+  return new Response(JSON.stringify(body), { status, headers });
 }
 
 function escapeHtml(value) {

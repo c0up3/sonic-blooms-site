@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sonic Blooms | Signal Room</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="/members.css?v=20260711a" />
+  </head>
+  <body>
+    <header class="member-header">
+      <a class="brand-link" href="/" aria-label="Back to Sonic Blooms">
+        <img src="/assets/sonic-blooms-wordmark.png" alt="Sonic Blooms" />
+      </a>
+      <nav aria-label="Signal Room navigation">
+        <a href="/">Public site</a>
+        <a href="#member-login">Login</a>
+        <a href="#library">Comic library</a>
+        <a href="#welcome-email">Welcome email</a>
+      </nav>
+    </header>
+
+    <main id="library" class="member-shell">
+      <section class="member-intro" aria-labelledby="member-title">
+        <p class="eyebrow">Members room</p>
+        <h1 id="member-title">The Signal Room is open.</h1>
+        <p>
+          This is the private Sonic Blooms room for story extras, comic pages,
+          behind-the-song notes, wallpapers, and early listens. Start with Blue
+          Light Hunger, then switch between the clean chapter sequence and the
+          archive cut with alternate panels.
+        </p>
+        <div id="member-login" class="member-pass">
+          <span>Access</span>
+          <strong>Email and confirmation code</strong>
+          <form id="member-login-form" class="member-login-form" method="post" action="/api/member-login" novalidate>
+            <label>
+              Email
+              <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              Confirmation code
+              <input name="code" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" placeholder="123456" required />
+            </label>
+            <div class="member-login-actions">
+              <button type="submit">Enter the Signal Room</button>
+              <button id="forgot-code" class="button-lite" type="button">Email my code</button>
+            </div>
+            <p id="member-login-message" role="status"></p>
+          </form>
+          <div id="member-session-panel" class="member-session-panel" hidden>
+            <p>Member pass active on this device.</p>
+            <div class="member-login-actions">
+              <button id="reset-code" type="button">Reset my code</button>
+              <button id="sign-out" class="button-lite" type="button">Sign out</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reader-layout" aria-label="Interactive comic reader">
+        <aside class="library-panel" aria-label="Comic library">
+          <div class="panel-heading">
+            <p class="eyebrow">Library</p>
+            <h2>Two comic collections</h2>
+          </div>
+          <div id="comic-list" class="comic-list"></div>
+        </aside>
+
+        <section class="reader-panel" aria-labelledby="comic-title">
+          <div class="reader-topline">
+            <div>
+              <p id="comic-era" class="eyebrow">Act 1</p>
+              <h2 id="comic-title">Blue Light Hunger</h2>
+            </div>
+            <div class="reader-status">
+              <span id="page-count">Page 01 / 12</span>
+              <button id="fullscreen-button" type="button">Full screen</button>
+            </div>
+          </div>
+
+          <div class="reader-stage" aria-live="polite">
+            <button id="prev-page" class="reader-nav reader-nav--prev" type="button" aria-label="Previous page">&lsaquo;</button>
+            <figure class="page-frame">
+              <img id="comic-page" src="" alt="" />
+              <figcaption id="page-caption"></figcaption>
+            </figure>
+            <button id="next-page" class="reader-nav reader-nav--next" type="button" aria-label="Next page">&rsaquo;</button>
+          </div>
+
+          <div class="reader-controls" aria-label="Page controls">
+            <input id="page-slider" type="range" min="1" max="12" value="1" aria-label="Comic page" />
+            <div id="thumb-strip" class="thumb-strip"></div>
+          </div>
+        </section>
+
+        <aside class="notes-panel" aria-label="Comic notes">
+          <p class="eyebrow">Story room</p>
+          <h2 id="note-title">The phone glows before the room wakes.</h2>
+          <p id="note-copy">
+            Blue Light Hunger begins with isolation, screen glow, appetite, and
+            exhaustion. The comic reader should feel less like a gallery and
+            more like evidence pulled from Luca's room.
+          </p>
+          <div class="member-drops">
+            <span>Blue Light Hunger comic</span>
+            <span>Archive pages</span>
+            <span>Behind the song</span>
+          </div>
+        </aside>
+      </section>
+
+      <section id="welcome-email" class="welcome-email" aria-labelledby="welcome-title">
+        <div>
+          <p class="eyebrow">Member message</p>
+          <h2 id="welcome-title">What the member receives.</h2>
+          <p>
+            The best flow is warm and simple: confirm they are inside, give them
+            one clear button back to the room, and tell them what is waiting
+            without promising a flood of email.
+          </p>
+        </div>
+        <article class="email-card" aria-label="Draft member welcome email">
+          <div class="email-meta">
+          <span>From: Sonic Blooms</span>
+          <span>Subject: Your Sonic Blooms confirmation code</span>
+        </div>
+          <h3>Your Sonic Blooms confirmation code.</h3>
+          <p>
+            Your confirmation code is <strong>123456</strong>. Use this code
+            with your email address when logging in to the Signal Room.
+          </p>
+          <a class="email-button" href="/members.html">Enter the Signal Room</a>
+          <p class="email-footnote">
+            Member access is for fans who respect the space. Abuse of the
+            platform, spam, harassment, scraping, or attempts to bypass access
+            controls may result in this confirmation code being revoked.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <dialog id="reader-dialog" class="reader-dialog" aria-labelledby="dialog-title">
+      <button id="close-dialog" class="dialog-close" type="button">Close</button>
+      <div class="dialog-reader">
+        <div class="reader-topline">
+          <div>
+            <p class="eyebrow">Full screen</p>
+            <h2 id="dialog-title">Blue Light Hunger</h2>
+          </div>
+          <span id="dialog-count">Page 01 / 12</span>
+        </div>
+        <div class="dialog-page-wrap">
+          <button id="dialog-prev" class="reader-nav reader-nav--prev" type="button" aria-label="Previous page">&lsaquo;</button>
+          <img id="dialog-page" src="" alt="" />
+          <button id="dialog-next" class="reader-nav reader-nav--next" type="button" aria-label="Next page">&rsaquo;</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="/members.js?v=20260711a" defer></script>
+  </body>
+</html>

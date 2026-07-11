@@ -16,7 +16,9 @@ Fan signup:
 - Optional Cloudflare Email Service send binding: `EMAIL`.
 - Optional Cloudflare Email Service REST fallback variables: `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_EMAIL_API_TOKEN`.
 - Optional variables: `SIGNUP_NOTIFY_TO`, `SIGNUP_NOTIFY_FROM`. Signup notifications default to `band@sonic-blooms.com` and `fans@sonic-blooms.com`.
-- Optional variables: `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`.
+- Member code email variables: `SEND_MEMBER_WELCOME` defaults to on; set `SEND_MEMBER_WELCOME=false` only to pause member emails. Optional: `MEMBERS_URL`, `MEMBER_WELCOME_FROM`.
+- Member login secret: `MEMBER_SESSION_SECRET`.
+- Turnstile site key defaults to the Sonic Blooms widget key in `/api/fan-config`; keep the secret in Cloudflare as `TURNSTILE_SECRET_KEY`.
 - Set `REQUIRE_TURNSTILE=true` after the Turnstile keys are configured.
 - Emergency switch: set `SIGNUPS_ENABLED=false` to pause the public waitlist.
 - Admin signup viewer: `/signup-admin.html`, backed by `/api/admin/signups`.

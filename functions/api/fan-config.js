@@ -3,8 +3,8 @@ export async function onRequestGet({ env }) {
     JSON.stringify({
       ok: true,
       signupsEnabled: env.SIGNUPS_ENABLED !== "false",
-      turnstileSiteKey: env.TURNSTILE_SITE_KEY || "",
-      membersAccess: "coming-soon",
+      turnstileSiteKey: env.TURNSTILE_SITE_KEY || "0x4AAAAAADzy9yspchdWmkzS",
+      membersAccess: "email-code",
     }),
     {
       headers: {

@@ -329,17 +329,17 @@ function wireFanForm() {
   let turnstileWidgetId = null;
   let fanConfig = { signupsEnabled: true, turnstileSiteKey: "" };
 
-  const showWaitlisted = (text = "You are on the list. Members access opens soon.") => {
+  const showWaitlisted = (text = "You are on the list. The Signal Room is open.") => {
     message.textContent = text;
     form.classList.add("is-waitlisted");
-    submitButton.textContent = "You are on the list";
+    submitButton.textContent = "Member pass active";
     submitButton.disabled = true;
   };
 
   const params = new URLSearchParams(window.location.search);
   if (params.has("name") || params.has("email") || params.has("favourite")) {
     history.replaceState(null, "", `${window.location.pathname}${window.location.hash || "#members"}`);
-    message.textContent = "Almost there. Add a valid email address to join the members waitlist.";
+    message.textContent = "Almost there. Add a valid email address to join the members list.";
   }
 
   const loadTurnstile = (siteKey) => {
@@ -363,14 +363,14 @@ function wireFanForm() {
     .then((config) => {
       fanConfig = { ...fanConfig, ...config };
       if (!fanConfig.signupsEnabled) {
-        message.textContent = "The members waitlist is paused for a moment.";
+        message.textContent = "The members list is paused for a moment.";
         submitButton.disabled = true;
         return;
       }
       loadTurnstile(fanConfig.turnstileSiteKey);
     })
     .catch(() => {
-      message.textContent = "The waitlist is available, but bot protection settings could not be checked.";
+      message.textContent = "The members list is available, but bot protection settings could not be checked.";
     });
 
   form.addEventListener("submit", async (event) => {
@@ -386,7 +386,7 @@ function wireFanForm() {
     if (fanConfig.turnstileSiteKey) {
       const token = window.turnstile && turnstileWidgetId !== null ? window.turnstile.getResponse(turnstileWidgetId) : "";
       if (!token) {
-        message.textContent = "Complete the bot check before joining the waitlist.";
+        message.textContent = "Complete the bot check before joining the members list.";
         return;
       }
       payload.turnstileToken = token;
@@ -402,14 +402,14 @@ function wireFanForm() {
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || data.ok === false) {
-        message.textContent = data.message || "Add a valid email address to join the members waitlist.";
+        message.textContent = data.message || "Add a valid email address to join the members list.";
         submitButton.disabled = false;
         if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
         return;
       }
-      showWaitlisted("You are on the list. Members access opens soon.");
+      showWaitlisted("You are on the list. The Signal Room is open.");
     } catch (error) {
-      message.textContent = "The waitlist could not be reached just now. Please try again in a moment.";
+      message.textContent = "The members list could not be reached just now. Please try again in a moment.";
       submitButton.disabled = false;
       if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
     }

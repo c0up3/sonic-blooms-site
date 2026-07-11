@@ -3,9 +3,15 @@ CREATE TABLE IF NOT EXISTS members (
   name TEXT,
   favourite TEXT,
   status TEXT NOT NULL DEFAULT 'waitlist',
+  confirmation_code TEXT,
+  code_created_at TEXT,
+  code_revoked_at TEXT,
+  banned_at TEXT,
+  ban_reason TEXT,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
-  verified_at TEXT
+  verified_at TEXT,
+  last_login_at TEXT
 );
 
 CREATE TABLE IF NOT EXISTS signup_attempts (

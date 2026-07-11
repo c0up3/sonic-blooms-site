@@ -15,7 +15,7 @@ clearButton.addEventListener("click", () => {
   tokenInput.value = "";
   currentSignups = [];
   exportButton.disabled = true;
-  rows.innerHTML = `<tr><td colspan="6">Enter the admin access code to load the list.</td></tr>`;
+  rows.innerHTML = `<tr><td colspan="8">Enter the admin access code to load the list.</td></tr>`;
   message.textContent = "Access code forgotten on this device.";
 });
 exportButton.addEventListener("click", exportCsv);
@@ -37,7 +37,7 @@ async function loadSignups() {
     const data = await response.json().catch(() => ({}));
     if (!response.ok || data.ok === false) {
       message.textContent = data.message || "Could not load signups.";
-      rows.innerHTML = `<tr><td colspan="6">Nothing loaded.</td></tr>`;
+      rows.innerHTML = `<tr><td colspan="8">Nothing loaded.</td></tr>`;
       exportButton.disabled = true;
       return;
     }
@@ -58,7 +58,7 @@ async function loadSignups() {
 
 function renderRows(signups) {
   if (!signups.length) {
-    rows.innerHTML = `<tr><td colspan="6">No signups yet.</td></tr>`;
+    rows.innerHTML = `<tr><td colspan="8">No signups yet.</td></tr>`;
     return;
   }
 
@@ -69,9 +69,11 @@ function renderRows(signups) {
           <td><strong>${escapeHtml(signup.email)}</strong></td>
           <td>${escapeHtml(signup.name || "")}</td>
           <td>${escapeHtml(signup.favourite || "")}</td>
-          <td>${escapeHtml(signup.status || "")}</td>
+          <td>${statusLabel(signup)}</td>
+          <td><code>${escapeHtml(signup.confirmation_code || "")}</code></td>
           <td>${formatDate(signup.created_at)}</td>
           <td>${formatDate(signup.updated_at)}</td>
+          <td>${formatDate(signup.last_login_at)}</td>
         </tr>
       `,
     )
@@ -80,7 +82,21 @@ function renderRows(signups) {
 
 function exportCsv() {
   if (!currentSignups.length) return;
-  const header = ["email", "name", "favourite", "status", "created_at", "updated_at", "verified_at"];
+  const header = [
+    "email",
+    "name",
+    "favourite",
+    "status",
+    "confirmation_code",
+    "code_created_at",
+    "code_revoked_at",
+    "banned_at",
+    "ban_reason",
+    "created_at",
+    "updated_at",
+    "verified_at",
+    "last_login_at",
+  ];
   const lines = [
     header.join(","),
     ...currentSignups.map((signup) => header.map((key) => csvCell(signup[key] || "")).join(",")),
@@ -91,6 +107,13 @@ function exportCsv() {
   link.download = `sonic-blooms-signups-${new Date().toISOString().slice(0, 10)}.csv`;
   link.click();
   URL.revokeObjectURL(link.href);
+}
+
+function statusLabel(signup) {
+  const parts = [signup.status || ""];
+  if (signup.banned_at) parts.push("banned");
+  if (signup.code_revoked_at) parts.push("revoked");
+  return escapeHtml([...new Set(parts.filter(Boolean))].join(" / "));
 }
 
 function csvCell(value) {

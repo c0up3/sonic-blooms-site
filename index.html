@@ -64,7 +64,7 @@
           </p>
           <div class="hero-actions" aria-label="Primary actions">
             <a class="button button--primary" href="#journey">Start the journey</a>
-            <a class="button button--ghost" href="#members">Members coming soon</a>
+            <a class="button button--ghost" href="/members.html">Enter the Signal Room</a>
           </div>
           <div class="hero-stats" aria-label="Sonic Blooms release snapshot">
             <span><strong>3</strong> albums</span>
@@ -162,12 +162,11 @@
       <section class="members-preview" id="members" aria-labelledby="members-title">
         <div class="section-heading">
           <p class="eyebrow">Members</p>
-          <h2 id="members-title">The Signal Room opens soon.</h2>
+          <h2 id="members-title">The Signal Room is open.</h2>
           <p>
-            This will become the private Sonic Blooms room for comic pages,
-            early listens, song notes, wallpapers, and fragments from Luca and
-            Seraphine's story. Access will open only after email verification
-            is properly protected.
+            The Sonic Blooms members room is where comic pages, early listens,
+            song notes, wallpapers, and fragments from Luca and Seraphine's
+            story live between releases.
           </p>
         </div>
         <div class="members-grid">
@@ -197,13 +196,14 @@
       <section class="vault" aria-labelledby="vault-title">
         <div class="vault-backdrop" aria-hidden="true"></div>
         <div class="vault-copy">
-          <p class="eyebrow">Coming soon</p>
-          <h2 id="vault-title">Join the list for the members room.</h2>
+          <p class="eyebrow">Members</p>
+          <h2 id="vault-title">Join the members room.</h2>
           <p>
-            Leave your email and favourite era so you can be notified when the
-            protected members room opens. The private area is not open yet.
+            Leave your email and favourite era so you can receive the welcome
+            message, return to the Signal Room, and hear when new pages or song
+            notes are added.
           </p>
-          <div class="vault-drops vault-teasers" aria-label="Members room preview">
+          <div class="vault-drops vault-teasers" aria-label="Members room extras">
             <span>Wallpapers</span>
             <span>Cover image downloads</span>
             <span>Story images</span>
@@ -213,8 +213,8 @@
         </div>
         <form id="fan-form" class="fan-card" method="post" action="/api/fan-signup" novalidate>
           <div class="fan-card__top">
-            <span>Member waitlist</span>
-            <strong>Get notified when access opens</strong>
+            <span>Member access</span>
+            <strong>Join the Signal Room</strong>
           </div>
           <label>
             Name
@@ -238,14 +238,15 @@
             </select>
           </label>
           <div id="turnstile-slot" class="turnstile-slot" hidden></div>
-          <button class="button button--primary" type="submit">Join the waitlist</button>
+          <button class="button button--primary" type="submit">Join the members room</button>
           <p id="fan-message" class="fan-message" role="status"></p>
           <div id="unlock-panel" class="unlock-panel">
-            <strong>Access is coming soon.</strong>
+            <strong>The room is open.</strong>
             <p>
-              Member-only pages and downloads will open after the protected
-              email access system is connected.
+              Start with the Blue Light Hunger comic archive. More member-only
+              pages, notes, downloads, and early listens will be added here.
             </p>
+            <a href="/members.html">Enter the Signal Room</a>
           </div>
         </form>
       </section>

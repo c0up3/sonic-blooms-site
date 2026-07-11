@@ -1,3 +1,4 @@
 .local-admin-token.txt
 .dev.vars
 .wrangler/
+WORK_TRACKER.md

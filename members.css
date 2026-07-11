@@ -61,6 +61,10 @@ input {
   font: inherit;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 button {
   color: inherit;
 }
@@ -162,7 +166,7 @@ button {
   border: 1px solid rgba(210, 178, 111, 0.28);
   border-radius: 0.35rem;
   background: rgba(0, 0, 0, 0.42);
-  color: var(--cream);
+  color: var(--ink);
   font: inherit;
   padding: 0.8rem 0.9rem;
 }
@@ -178,7 +182,7 @@ button {
   border: 1px solid rgba(210, 178, 111, 0.42);
   border-radius: 999px;
   background: rgba(210, 178, 111, 0.14);
-  color: var(--cream);
+  color: var(--ink);
   cursor: pointer;
   font: inherit;
   font-weight: 900;
@@ -187,7 +191,7 @@ button {
 
 .member-login-actions button[type="submit"],
 #reset-code {
-  background: linear-gradient(135deg, var(--gold), #8f6b34);
+  background: linear-gradient(135deg, var(--brass), #8f6b34);
   color: #080706;
 }
 
@@ -200,7 +204,7 @@ button {
 
 .member-session-panel p {
   margin: 0;
-  color: var(--cream);
+  color: var(--ink);
   font-weight: 800;
 }
 

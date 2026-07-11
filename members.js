@@ -161,11 +161,18 @@ async function checkSession() {
     const data = await response.json().catch(() => ({}));
     const active = response.ok && data.ok;
     document.body.classList.toggle("has-member-session", active);
-    if (sessionPanel) sessionPanel.hidden = !active;
-    if (memberLoginForm) memberLoginForm.hidden = active;
-    if (active) setMemberMessage(`Logged in as ${data.email}.`);
+    setSessionView(active, data.email);
   } catch {
     document.body.classList.remove("has-member-session");
+    setSessionView(false);
+  }
+}
+
+function setSessionView(active, email = "") {
+  if (sessionPanel) sessionPanel.hidden = !active;
+  if (memberLoginForm) memberLoginForm.hidden = active;
+  if (active) {
+    setMemberMessage(`Logged in as ${email}.`);
   }
 }
 
@@ -262,9 +269,8 @@ resetCodeButton?.addEventListener("click", async () => {
 
 signOutButton?.addEventListener("click", async () => {
   await fetch("/api/member-session", { method: "DELETE" });
-  if (memberLoginForm) memberLoginForm.hidden = false;
-  if (sessionPanel) sessionPanel.hidden = true;
   document.body.classList.remove("has-member-session");
+  setSessionView(false);
   setMemberMessage("Signed out on this device.");
 });
 

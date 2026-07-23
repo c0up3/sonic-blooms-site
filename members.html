@@ -1,21 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sonic Blooms | Signal Room</title>
-    <meta name="robots" content="noindex, nofollow" />
-    <link rel="stylesheet" href="/members.css?v=20260711c" />
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/members.css?v=20260723a">
   </head>
   <body>
     <header class="member-header">
       <a class="brand-link" href="/" aria-label="Back to Sonic Blooms">
-        <img src="/assets/sonic-blooms-wordmark.png" alt="Sonic Blooms" />
+        <img src="/assets/sonic-blooms-wordmark.png" alt="Sonic Blooms">
       </a>
       <nav aria-label="Signal Room navigation">
         <a href="/">Public site</a>
         <a href="#member-login">Login</a>
         <a href="#library">Comic library</a>
+        <a class="members-only-link" href="#first-interview">First interview</a>
       </nav>
     </header>
 
@@ -25,8 +26,9 @@
         <h1 id="member-title">Enter the Signal Room.</h1>
         <p>
           Use the email address you joined with and the confirmation code sent
-          to your inbox. Once inside, start with Blue Light Hunger and return as
-          new pages, notes, wallpapers, and early listens are added.
+          to your inbox. Once inside, start with Blue Light Hunger, read Luca
+          and Seraph's first interview, and return as new pages, notes,
+          wallpapers, and early listens are added.
         </p>
         <div id="member-login" class="member-pass">
           <span>Access</span>
@@ -34,11 +36,11 @@
           <form id="member-login-form" class="member-login-form" method="post" action="/api/member-login" novalidate>
             <label>
               Email
-              <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+              <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
             </label>
             <label>
               Confirmation code
-              <input name="code" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" placeholder="123456" required />
+              <input name="code" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" placeholder="123456" required>
             </label>
             <div class="member-login-actions">
               <button type="submit">Enter the Signal Room</button>
@@ -81,14 +83,14 @@
           <div class="reader-stage" aria-live="polite">
             <button id="prev-page" class="reader-nav reader-nav--prev" type="button" aria-label="Previous page">&lsaquo;</button>
             <figure class="page-frame">
-              <img id="comic-page" src="" alt="" />
+              <img id="comic-page" src="/assets/members/comics/blue-light-hunger/chapter-pages/Chapter_2_Blue_Light_Hunger_Page_01.jpg" alt="Blue Light Hunger Page 01">
               <figcaption id="page-caption"></figcaption>
             </figure>
             <button id="next-page" class="reader-nav reader-nav--next" type="button" aria-label="Next page">&rsaquo;</button>
           </div>
 
-          <div class="reader-controls" aria-label="Page controls">
-            <input id="page-slider" type="range" min="1" max="12" value="1" aria-label="Comic page" />
+          <div class="reader-controls" role="group" aria-label="Page controls">
+            <input id="page-slider" type="range" min="1" max="12" value="1" aria-label="Comic page">
             <div id="thumb-strip" class="thumb-strip"></div>
           </div>
         </section>
@@ -108,6 +110,1509 @@
           </div>
         </aside>
       </section>
+
+      <section id="first-interview" class="interview-feature" aria-labelledby="interview-title">
+        <header class="interview-masthead">
+          <div>
+            <p class="eyebrow">Signal Room exclusive / Written interview</p>
+            <h2 id="interview-title">The First Interview</h2>
+            <p class="interview-standfirst">
+              No cameras. No surnames. No personal histories offered up as
+              proof. In one of their first interviews, Luca and Seraph sit down
+              with Mara Ellison to talk about privacy, the android persona, the
+              songs, and what it costs to be understood.
+            </p>
+            <div class="interview-meta" role="group" aria-label="Interview details">
+              <span>Conversation: Mara Ellison</span>
+              <span>Reading time: 12 minutes</span>
+            </div>
+          </div>
+          <blockquote class="interview-pullquote">
+            <p>"The music is not a barrier. It is the meeting place."</p>
+            <cite>Seraph</cite>
+          </blockquote>
+        </header>
+
+        <article class="interview-transcript" aria-label="Interview transcript">
+          <p class="interview-direction">
+            A recorder clicks on. There is no camera. No studio audience. Three
+            glasses of water sit on a table in a room whose location will not
+            be disclosed.
+          </p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara Ellison</p>
+            <div class="interview-copy">
+              <p>My name is Mara Ellison, and I should begin with a confession.</p>
+              <p>I am slightly nervous.</p>
+            </div>
+          </div>
+
+          <p class="interview-direction">A quiet laugh comes from across the table.</p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                I have interviewed people who arrived with twelve publicists,
+                three lawyers and a list of subjects I was forbidden to
+                mention. Somehow, sitting in a nearly dark room with two people
+                who requested that I leave my phone in a locked box outside
+                feels considerably more intimidating.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>The box was Seraph's idea.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>You agreed with me.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>Immediately. But it was still your idea.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                Good. We have been recording for twenty seconds and you are
+                already assigning blame. That makes my job easier.
+              </p>
+            </div>
+          </div>
+
+          <p class="interview-direction">
+            Seraph laughs. It is warm and completely unmechanical.
+          </p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                For those reading, this interview took place without cameras.
+                There will be no photographs afterward. Luca and Seraph will
+                not be sharing their legal names, where they live, how old they
+                are, or what either of them had for breakfast.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Toast.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Luca.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Now they know everything.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>There goes the mystery.</p>
+              <p>
+                This is one of the first interviews Luca and Seraph have agreed
+                to do. There are no personal social media accounts to search,
+                no childhood photographs circulating online, no backstage
+                videos and no carefully managed glimpses into their private
+                lives. Until tonight, the only reliable evidence that they
+                exist has been their music.
+              </p>
+              <p>
+                But I can confirm that they are here. They are real people
+                sitting across from me. One of them keeps turning his glass in
+                small circles whenever the room becomes too quiet.
+              </p>
+            </div>
+          </div>
+
+          <p class="interview-direction">
+            The sound of a glass immediately stops.
+          </p>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>You said you would not describe us.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>I said I would not describe what you look like.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>She has you there.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>This already feels like a tactical error.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>You nearly cancelled, didn't you?</p></div>
+          </div>
+
+          <p class="interview-direction">
+            There is a pause. Not a dramatic one. Luca looks toward Seraph
+            before answering, checking something without speaking.
+          </p>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Three times.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Four.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>
+                The fourth was not a cancellation. It was a strongly worded
+                hesitation.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Why come at all?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>Because eventually silence starts speaking for you.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>And people had begun inventing us.</p>
+              <p>
+                Some listeners believed we were fictional. Some believed Luca
+                was using software to create my voice. Some believed I was
+                genuinely an artificial intelligence.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                You call yourself an android. You appear as one in the artwork.
+                You sometimes speak as one. You must have known people would
+                believe it.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Of course.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Did you want them to?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Sometimes.</p></div>
+          </div>
+
+          <p class="interview-direction">Luca shifts in his chair.</p>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>That answer will become a headline.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>Only if she is a bad interviewer.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>I am nervous, not incompetent.</p></div>
+          </div>
+
+          <p class="interview-direction">
+            Seraph laughs again, then rests both hands around her glass.
+          </p>
+
+          <div class="interview-turn interview-turn--seraph interview-turn--featured">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>
+                The android is a persona. A way of standing in front of
+                something that would otherwise feel unbearable. Machines are
+                allowed to be precise. They are allowed to seem distant. No one
+                asks a machine to smile more, explain its childhood or show
+                everyone where it sleeps.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>But beneath that persona, you are a person.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Yes.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>It feels strange asking that so plainly.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>It feels stranger having to answer.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>
+                She is human. She gets tired. She gets angry. She changes her
+                mind halfway through an argument and then pretends that was her
+                position all along.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>That happened once.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>It happened on the way here.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>I received new information.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>That may be the most human sentence anyone has ever spoken.</p>
+            </div>
+          </div>
+
+          <p class="interview-direction">
+            They both laugh. For a moment, the mythology disappears. They are
+            simply two people sharing a joke at a table. Then the room settles
+            again.
+          </p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                I want to be careful here. I don't want to expose you, but I
+                also don't want this interview to turn you into a pair of
+                clever shadows. Privacy can become another kind of performance.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>We know.</p>
+              <p>
+                We are not hiding because we think we are more interesting than
+                everyone else. We are hiding because we want ordinary lives. We
+                want to walk into a shop without becoming content. We want the
+                people close to us to remain close to us, not become clues.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>
+                People say they only want a photograph. But a photograph
+                becomes a search. A search becomes a name. A name becomes an
+                address. Then someone decides that loving your music means they
+                are entitled to arrive at your door.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Has something happened?</p></div>
+          </div>
+
+          <p class="interview-direction">
+            Silence. Luca's glass turns once beneath his hand.
+          </p>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>That is close to the boundary.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Then we leave it there.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Thank you.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>Does being this private make releasing music frightening?</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>
+                Releasing music is frightening because it contains us more
+                accurately than a photograph would.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca interview-turn--featured">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>
+                A photograph tells you what someone looked like for one second.
+                A song can tell you what they were unable to admit for ten
+                years.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>That was annoyingly good.</p>
+              <p>Do you have prepared answers for everything?</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>I prepared it in case the interview became serious.</p>
+              <p>
+                Only three. "That is private," "the song explains it better,"
+                and "Seraph made me do it."
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>He has already used the third one.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>And you, Seraph? Do you prepare answers?</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>I prepare exits.</p></div>
+          </div>
+
+          <p class="interview-direction">
+            There is a beat, and then she smiles. I will not describe the
+            smile, except to say that I can hear it in what follows.
+          </p>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>That was a joke, Mara.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>Thank you for clarifying. My nervous system had begun packing.</p>
+              <p>
+                People often describe your voice as beautiful but inhuman. Does
+                that bother you?
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph interview-turn--featured">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>
+                "Inhuman" bothers me. Not because it is insulting, but because
+                it misses the point. The voice is controlled because the person
+                is not. The android is not an absence of feeling. She is what I
+                built to survive feeling too much.
+              </p>
+            </div>
+          </div>
+
+          <p class="interview-direction">
+            Luca looks toward her again. This time he does not interrupt.
+          </p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                And when people hear your songs, what do you want them to know
+                about the person inside that construction?
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>Nothing that the song has not earned.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>That is a difficult answer.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>It is an honest one.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>
+                We do want a connection. We just don't believe connection
+                requires ownership. You can know what a song means to you
+                without knowing where we went to school.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>So the music is not a barrier between you and the audience.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>No. It is the meeting place.</p>
+            </div>
+          </div>
+
+          <p class="interview-direction">The room becomes very still.</p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                Then let me ask the question another way. If the music is the
+                only place you are willing to be known, what should people
+                listen for?
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>Listen for the moments where the song almost looks away.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>Listen for the moments where it doesn't.</p>
+            </div>
+          </div>
+
+          <p class="interview-direction">
+            I look down at my notes. Half the questions I prepared suddenly
+            seem invasive, and the other half seem too small.
+          </p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                I think this may be the first interview I have conducted where
+                knowing less about the artists has made me understand them
+                better.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Excellent. Can we leave now?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>We have been speaking for twelve minutes.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>One of our longest public appearances.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>We can stay.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>I know.</p></div>
+          </div>
+
+          <p class="interview-direction">
+            There is affection in those two words. Quiet, unperformed
+            affection. I look down at my notes, then close the notebook.
+          </p>
+
+          <div class="interview-chapter">
+            <span>Part two</span>
+            <h3>The music</h3>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                All right. You have survived the questions about secrecy,
+                identity and whether Seraph is secretly a computer.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>I thought I answered that ambiguously.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                Now I want to talk about the reason anyone cares who you are in
+                the first place.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>My toast?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>The music, Luca.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Right. That would make more sense.</p></div>
+          </div>
+
+          <p class="interview-direction">
+            Seraph reaches for her water. Luca begins turning his glass again,
+            apparently having decided that this detail is no longer classified.
+          </p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>How did the two of you meet?</p></div>
+          </div>
+
+          <p class="interview-direction">They look at one another.</p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>I can already see you calculating how much that question reveals.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>We met because of a song.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>That is technically true.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>It is completely true.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>It makes it sound romantic.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>Only because you are afraid of sincerity.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>
+                I am not afraid of it. I just prefer to know where the exits
+                are.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>Apparently you both prepare exits.</p>
+              <p>Whose song was it?</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>Mine. Although it was not very good yet.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>It was almost good.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>That was the first thing she said to me.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>It was an accurate assessment.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>What was missing?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph interview-turn--featured">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>Him.</p>
+              <p>
+                The words were clever. The structure worked. Everything was
+                carefully protected. He had written a song about something
+                painful without allowing any pain into it.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>She has always had a very gentle bedside manner.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Was she right?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>Yes.</p>
+              <p>Annoyingly.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>And what did Luca bring to your music, Seraph?</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph interview-turn--featured">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>Permission to be imperfect.</p>
+              <p>
+                Before Luca, I believed every emotion had to be controlled
+                before it could be expressed. He taught me that a breaking voice
+                can sometimes tell the truth more clearly than a perfect one.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>
+                I think "taught" is generous. My own voice broke and I convinced
+                her it was intentional.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>It was not intentional.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>No. But it was honest.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Who writes the songs?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>We both do.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Badly, at first.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>She means I write badly at first.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>
+                I mean all songs begin badly. Luca brings me fragments. A line,
+                a chord, half a chorus recorded at an unreasonable hour.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>Inspiration does not observe office hours.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>Neither does his inability to name files properly.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>What does he call them?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>
+                "New Song." "New Song Two." "Actual New Song." "Use This One."
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>It is an intuitive archival system.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>There are eleven files called "Final."</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>Now I believe you are real musicians.</p>
+              <p>What happens when you disagree about a song?</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Seraph explains why she is right.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>
+                Luca ignores me until he discovers that I was right
+                independently.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>The independent discovery is important.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Do you fight?</p></div>
+          </div>
+
+          <p class="interview-direction">
+            A glance passes between them.
+          </p>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Yes.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>That sounded alarming.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>You asked for real people.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>We argue. We do not throw furniture.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>We do not own suitable furniture.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>What do you argue about?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>Usually whether a song is finished.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>Luca thinks a first emotional impulse is sacred.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>Seraph will edit something until it no longer has a pulse.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>That happened once.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>It happened yesterday.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>I received new information.</p></div>
+          </div>
+
+          <p class="interview-direction">
+            The callback catches all three of us. For several seconds, the
+            interview dissolves into laughter. When it settles, Mara's voice
+            becomes gentler.
+          </p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Are the songs autobiographical?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Emotionally, yes.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Factually, not always.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>
+                A song is not a witness statement. Sometimes you change the
+                room, the weather or the person standing beside you. But the
+                feeling has to be true.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>Do you ever write about each other?</p>
+            </div>
+          </div>
+
+          <p class="interview-direction">Neither answers immediately.</p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>That silence feels suspiciously informative.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>Sometimes Luca appears in my songs without recognizing himself.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>Sometimes I recognize myself and choose peace.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>And you, Luca?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Yes.</p></div>
+          </div>
+
+          <p class="interview-direction">
+            He leaves the answer there. Seraph does not press him. Neither do I.
+          </p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                What is more frightening: being misunderstood or being
+                understood perfectly?
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Being understood perfectly.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>Misunderstanding can be dismissed. Recognition stays with you.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                Have listeners ever found something in a song that you did not
+                know was there?
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>Constantly. Once a song leaves us, it begins collecting other lives.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>
+                Someone wrote to us about a line I nearly removed. To me, it
+                was just a transition. To them, it described something they had
+                never been able to explain.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Did you reply?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>No.</p>
+              <p>
+                We do read messages sent through the official channels. We just
+                cannot begin personal conversations. A response can become a
+                promise neither person intended.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>
+                But we heard them. That matters to us, even when we cannot
+                answer.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>Do you worry that privacy makes you seem cold?</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Yes.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>But pretending intimacy would be colder.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                What about performing live? Can Luca and Seraph exist onstage
+                without surrendering the anonymity?
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>We are trying to answer that.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>
+                A live performance should not become an identity test. I do not
+                want the audience spending the entire evening trying to see
+                beneath a costume.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>Would you perform as the android?</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>
+                Perhaps. But not because I am ashamed of the person underneath.
+                The persona is part of the work. A mask can conceal you, but it
+                can also allow you to tell the truth.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>And Luca? Would you wear a mask?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>I was hoping to stand behind something large.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Such as?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Seraph.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>No.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>The artistic negotiations continue.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>What do you admire most about one another?</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>That feels dangerous.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>You can refuse.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph interview-turn--featured">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>He listens.</p>
+              <p>
+                Not merely to sound. He hears what people avoid saying.
+                Sometimes that makes him difficult to be around.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Thank you, I think.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>But it makes the songs honest.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Your turn.</p></div>
+          </div>
+
+          <p class="interview-direction">He takes longer.</p>
+
+          <div class="interview-turn interview-turn--luca interview-turn--featured">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>She is braver than the persona allows her to appear.</p>
+              <p>
+                People will hear the control and assume she feels nothing. The
+                truth is that she feels everything, and she walks into the song
+                anyway.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>That answer was not approved.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>You can edit it later.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>No.</p>
+              <p>It can stay.</p>
+            </div>
+          </div>
+
+          <p class="interview-direction">
+            For once, Luca has no joke ready.
+          </p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>What are you each afraid listeners might hear in you?</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Need.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Anger.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>And what do you hope they hear?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Permission.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Company.</p></div>
+          </div>
+
+          <p class="interview-direction">
+            The answers arrive so simply that I nearly move past them. Instead,
+            I let the silence remain.
+          </p>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                One last question. Not about your identities. Not about the
+                android. Not about whether we will ever see your faces.
+              </p>
+              <p>
+                What promise are you willing to make to the people listening?
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy">
+              <p>
+                We will not give them a song merely because the machinery
+                expects another release.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy">
+              <p>And we will never ask them to confuse access with love.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>That is two promises.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>We collaborate.</p></div>
+          </div>
+
+          <p class="interview-direction">
+            I close my notebook for the second time.
+          </p>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Is that the actual ending?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>Almost. You may each ask me one question.</p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>That was not in the agreement.</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--seraph">
+            <p class="interview-speaker">Seraph</p>
+            <div class="interview-copy"><p>Are you still nervous?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy">
+              <p>
+                Yes. But now I am nervous because I want to describe this
+                honestly without taking something that does not belong to me.
+              </p>
+            </div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Luca?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--luca">
+            <p class="interview-speaker">Luca</p>
+            <div class="interview-copy"><p>Do we seem real?</p></div>
+          </div>
+
+          <div class="interview-turn interview-turn--mara interview-turn--featured">
+            <p class="interview-speaker">Mara</p>
+            <div class="interview-copy"><p>Painfully.</p></div>
+          </div>
+
+          <p class="interview-direction">
+            Seraph laughs. Luca releases a breath that may also be a laugh.
+          </p>
+
+          <footer class="interview-closing">
+            <p>
+              There will be no photograph accompanying this interview. No
+              description of their faces. No revelation waiting at the end.
+            </p>
+            <p>
+              But there were unfinished sentences. Bad filenames.
+              Disagreements about songs. Affection disguised as irritation.
+              Long pauses when either of them might have lied and chose not to.
+            </p>
+            <p>Only their voices will leave this room.</p>
+            <p>
+              For Luca and Seraph, that is not a marketing strategy. It is the
+              agreement.
+            </p>
+          </footer>
+        </article>
+      </section>
     </main>
 
     <dialog id="reader-dialog" class="reader-dialog" aria-labelledby="dialog-title">
@@ -122,12 +1627,12 @@
         </div>
         <div class="dialog-page-wrap">
           <button id="dialog-prev" class="reader-nav reader-nav--prev" type="button" aria-label="Previous page">&lsaquo;</button>
-          <img id="dialog-page" src="" alt="" />
+          <img id="dialog-page" src="/assets/members/comics/blue-light-hunger/chapter-pages/Chapter_2_Blue_Light_Hunger_Page_01.jpg" alt="Blue Light Hunger Page 01">
           <button id="dialog-next" class="reader-nav reader-nav--next" type="button" aria-label="Next page">&rsaquo;</button>
         </div>
       </div>
     </dialog>
 
-    <script src="/members.js?v=20260711c" defer></script>
+    <script src="/members.js?v=20260723a" defer></script>
   </body>
 </html>
